@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DEBUT — AI Design Platform</title>
+<meta name="description" content="DEBUT แพลตฟอร์มออกแบบและก่อสร้างด้วย AI ประเมินงบ สร้างคอนเซปต์ และนัดสถาปนิกตัวจริง โดย BAUHAUS DESIGN (THAILAND)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="top">
+<div class="wrap">
+<a class="brand" href="/" aria-label="DEBUT หน้าแรก">
+<svg viewBox="0 0 270 240" aria-hidden="true"><rect width="40" height="240" fill="#161616"/><path d="M40 0A60 60 0 0 1 40 120Z" fill="#D93A26"/><path d="M40 120A60 60 0 0 1 40 240Z" fill="#1F4FA3"/><rect x="120" width="30" height="240" fill="#161616"/><path d="M150 0A120 120 0 0 1 150 240Z" fill="#F2B705"/><circle cx="190" cy="120" r="22" fill="#161616"/></svg>
+<b>DEBUT</b>
+</a>
+<nav class="nav" id="nav" aria-label="เมนูหลัก">
+<a href="#why">WHY DEBUT</a><a href="#ai">AI STUDIO</a><a href="#boq">ESTIMATOR</a><a href="#data">DATA</a><a href="#flow">BOOKING</a><a href="/status">MY PROJECT</a>
+</nav>
+<div class="top-right">
+<span class="lang"><b>TH</b> / EN</span>
+<button class="btn dark" type="button" data-open-chat>คุยกับสถาปนิก</button>
+<button class="menu-btn" type="button" id="menuBtn" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="nav"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
+</div>
+</div>
+</header>
+
+<main>
+<section class="hero" id="top">
+<canvas id="heroFlow" aria-hidden="true"></canvas>
+<div class="wrap">
+<div class="eyebrow">AI DESIGN PLATFORM · BIG DATA · VERIFIED STUDIOS</div>
+<h1>เล่าโปรเจกต์ของคุณ<br>AI ช่วยประเมินงบ สร้างคอนเซปต์<br>และนัด<em>สถาปนิกตัวจริง</em>ให้ทันที</h1>
+<form class="prompt" id="heroForm">
+<div class="prompt-bar">
+<label class="sr" for="heroPrompt">เล่าความต้องการของโปรเจกต์</label>
+<input id="heroPrompt" type="text" autocomplete="off" placeholder="เช่น อยากสร้างโรงแรม 40 ห้องที่ภูเก็ต สไตล์ Tropical">
+<button class="mic" type="button" id="heroMic" aria-label="พูดด้วยเสียง" aria-pressed="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+<button class="btn primary" type="submit">ถาม AI →</button>
+</div>
+<div class="mic-note" id="heroMicNote" aria-live="polite"></div>
+<div class="suggest">
+<button type="button">รีโนเวตตึกแถว 3 ชั้น ย่านเยาวราช</button>
+<button type="button">บ้านเดี่ยว 2 ชั้น 250 ตร.ม. งบ 8 ล้าน</button>
+<button type="button">ออฟฟิศ 400 ตร.ม. เริ่มงานเดือนหน้า</button>
+</div>
+</form>
+<div class="powered">
+<div class="powered-card">
+<svg viewBox="0 0 270 240" aria-hidden="true"><rect width="40" height="240" fill="#161616"/><path d="M40 0A60 60 0 0 1 40 120Z" fill="#D93A26"/><path d="M40 120A60 60 0 0 1 40 240Z" fill="#1F4FA3"/><rect x="120" width="30" height="240" fill="#161616"/><path d="M150 0A120 120 0 0 1 150 240Z" fill="#F2B705"/><circle cx="190" cy="120" r="22" fill="#161616"/></svg>
+<div><small>POWERED BY</small><b>BAUHAUS DESIGN</b><small style="letter-spacing:.5em">THAILAND</small></div>
+</div>
+<span style="font-size:14px;color:var(--ink-2);max-width:420px">พิมพ์ หรือกดไมค์พูดได้ทั้งภาษาไทยและอังกฤษ AI วิเคราะห์ความต้องการแล้วส่งต่อสถาปนิกที่ตรงงานให้</span>
+</div>
+</div>
+</section>
+
+<section class="band" id="data">
+<div class="wrap">
+<div class="sec-head" style="margin:0">
+<div><div class="eyebrow">BIG DATA · LIVE INDEX</div><h2 class="h2">ทุกคำแนะนำของ AI อ้างอิงจากฐานข้อมูลจริง</h2></div>
+<span style="font-size:13px;color:var(--on-night-muted)">ตัวเลขเชื่อมต่อจากฐานข้อมูลเมื่อเปิดใช้งานจริง</span>
+</div>
+<div class="stats">
+<div><b class="num">[จำนวน]</b><span>โครงการในฐานข้อมูล แยกตามประเภทอาคารและจังหวัด</span></div>
+<div><b class="num">[จำนวน]</b><span>สตูดิโอและผู้รับเหมาที่ยืนยันตัวตนแล้ว พร้อมเกรดงาน</span></div>
+<div><b>[วันที่]</b><span>อัปเดตราคากลางวัสดุและค่าแรงล่าสุด ใช้คำนวณ BOQ</span></div>
+<div><b class="num">77</b><span>จังหวัดที่ระบบรองรับการค้นหาสถาปนิกในพื้นที่</span></div>
+</div>
+</div>
+</section>
+
+<section class="wrap sec" id="why" style="padding-bottom:40px">
+<div class="eyebrow">WHY DEBUT · ECOSYSTEM OF TRUST</div>
+<h2 class="why-h" style="margin-top:20px">Seamless Architecture &amp; Construction<br>จบทุกความกังวล เชื่อมวิสัยทัศน์สู่ความจริง<br>ด้วยมาตรฐานระดับสากล</h2>
+<p class="lead" style="margin-top:20px;font-size:18px;font-weight:300;max-width:46em">DEBUT ไม่ใช่แค่กระดานหาช่าง แต่เป็น <b style="font-weight:500;color:var(--ink)">ผู้จัดการโครงการส่วนตัว (Virtual Project Manager)</b> ที่ดูแลตั้งแต่บรรทัดแรกของงานออกแบบ จนถึงวันส่งมอบกุญแจ</p>
+</section>
+
+<section class="wrap" style="padding-bottom:72px">
+<div class="sec-head" style="margin-bottom:28px">
+<h3 style="margin:0;font:400 26px/1.3 var(--f-display)">4 ปัญหาที่ทำให้โครงการเสียเวลาและงบบานปลาย</h3>
+<span style="font-size:14px;color:var(--muted)">ปัญหาคลาสสิกของวงการก่อสร้าง และวิธีที่ DEBUT อุดรอยรั่ว</span>
+</div>
+<div class="pains">
+<div class="pain"><span class="tag">PAIN · ความไม่ไว้ใจ</span><b>ไม่รู้ว่าผู้รับเหมาหรือผู้ออกแบบคนไหนเป็นตัวจริง</b><span>เสียเวลาคัดคนเอง และเสี่ยงได้ทีมที่ไม่มีศักยภาพพอ</span><span class="fix"><strong>DEBUT:</strong> คัดกรองประวัติงาน ฐานะการเงิน และคุณภาพผลงานก่อนเข้าระบบ</span></div>
+<div class="pain"><span class="tag">PAIN · งบบานปลาย</span><b>ราคาไม่โปร่งใส ตีความวัสดุไม่ตรงกัน</b><span>งบเพิ่มทีละนิดระหว่างทาง จนเกินแผนการเงินที่วางไว้</span><span class="fix"><strong>DEBUT:</strong> Smart BOQ ราคากลางโปร่งใส และโครงสร้าง BOQ มาตรฐานที่เป็นธรรม</span></div>
+<div class="pain"><span class="tag">PAIN · งานล่าช้า</span><b>สร้างไม่เหมือนแบบ ต้องรื้อแก้ เวลาเลื่อนไม่จบ</b><span>คุยภาษาช่างไม่รู้เรื่อง บรีฟไม่ชัด และแก้งานไม่รู้จบ</span><span class="fix"><strong>DEBUT:</strong> AI สรุป Requirement เป็นระบบ คุมความถูกต้องของแบบด้วย BIM และ Dashboard แบบ Real-time</span></div>
+<div class="pain"><span class="tag">PAIN · การทิ้งงาน</span><b>เบิกเงินเกินงวดแล้วหาย หรือทำงานเสร็จแต่เก็บเงินไม่ได้</b><span>ความเสียหายตกกับทั้งเจ้าของโครงการและผู้รับเหมา</span><span class="fix"><strong>DEBUT:</strong> ระบบชำระเงินตัวกลางตามงวดงาน จ่ายเมื่องานผ่านการตรวจสอบ</span></div>
+</div>
+</section>
+
+<section class="aud">
+<div class="wrap">
+<div class="aud-card">
+<div><div class="eyebrow">FOR PROJECT OWNERS · PEACE OF MIND</div><h3 style="margin-top:6px">เจ้าของบ้าน นักลงทุน<br>และเจ้าของกิจการ</h3></div>
+<div class="pts">
+<div class="pt"><b>The Elite Network · คัดกรองเฉพาะตัวจริง</b><span>ทำงานกับผู้ออกแบบและผู้รับเหมาที่ผ่าน Vetting Process ทั้งประวัติงาน ฐานะการเงิน และคุณภาพผลงาน</span></div>
+<div class="pt"><b>Design Meets Reality · ภาพ 3D คือของจริง</b><span>AI ช่วยคุมความถูกต้องของแบบผ่าน BIM ลดปัญหาผู้รับเหมาตีความแบบผิด</span></div>
+<div class="pt"><b>Budget &amp; Time Control · งบไม่บาน งานตรงเวลา</b><span>Smart BOQ ราคากลางโปร่งใส และ Dashboard ติดตามงานแบบ Real-time อนุมัติงานได้จากมือถือ</span></div>
+<div class="pt"><b>Secure Payment Milestone · จ่ายเงินอย่างสบายใจ</b><span>เงินผ่านระบบตัวกลาง จ่ายให้ผู้รับเหมาเมื่อส่งมอบงานผ่านมาตรฐานตามงวดที่ตรวจแล้วเท่านั้น</span></div>
+</div>
+<button class="btn primary" type="button" data-open-chat style="align-self:flex-start">เริ่มโครงการกับ DEBUT</button>
+</div>
+<div class="aud-card dark">
+<div><div class="eyebrow">FOR CONTRACTORS &amp; DESIGNERS · PROFESSIONAL ENVIRONMENT</div><h3 style="margin-top:6px">ผู้รับเหมา สถาปนิก<br>และนักออกแบบ</h3></div>
+<div class="pts">
+<div class="pt"><b>Pre-Qualified Leads · เจอลูกค้าตัวจริง</b><span>AI คัดกรองลูกค้า ประเมินความต้องการและงบเบื้องต้นให้ บอกลาการทำแบบเสนอราคาฟรีให้คนที่ยังไม่พร้อม</span></div>
+<div class="pt"><b>Crystal Clear Scope · บรีฟชัด ไม่แก้งานไม่รู้จบ</b><span>AI Agent รวบรวม Requirement เป็นระบบ พร้อมสัญญามาตรฐานที่ปกป้องขอบเขตงานของคุณ</span></div>
+<div class="pt"><b>Guaranteed Cash Flow · ทำงานได้เงินชัวร์</b><span>ล็อกงบตามงวดงานตั้งแต่เซ็นสัญญา ส่งมอบผ่านเกณฑ์แล้วได้รับเงินตรงเวลา</span></div>
+<div class="pt"><b>Focus on Creation · เรื่องจัดการเราดูแลให้</b><span>ใช้เครื่องมือ Project Management ระบบออกใบแจ้งหนี้ และปฏิทินส่งมอบงานได้ฟรี</span></div>
+</div>
+<a class="btn ghost-light" href="/admin" style="align-self:flex-start">ดูระบบหลังบ้านสำหรับพาร์ทเนอร์</a>
+</div>
+</div>
+</section>
+
+<section class="wrap sec" style="padding-bottom:24px">
+<div class="sec-head">
+<div><div class="eyebrow">PROOF · SHOW, DON'T JUST TELL</div><h2 class="h2">หลักฐานที่จับต้องได้</h2></div>
+<p class="lead" style="max-width:420px">สามระบบที่ทำให้คำสัญญาข้างบนเกิดขึ้นจริง</p>
+</div>
+<div class="proofs">
+<div class="proof"><div class="proof-h"><span class="eyebrow">AI MATCHMAKING</span><b>จับคู่ด้วยความลึกของฐานข้อมูล</b></div>
+<div class="proof-b"><div style="padding:12px 14px;background:#fff;font-size:14px"><span class="eyebrow" style="font-size:10px">OWNER</span><br>คลินิกทันตกรรมสไตล์มินิมอล</div><div class="mono" aria-hidden="true" style="align-self:center;font-size:12px;letter-spacing:.14em;color:var(--accent)">↓ MATCH</div><div style="padding:12px 14px;background:#fff;border:1px solid var(--accent);font-size:14px"><span class="eyebrow" style="font-size:10px;color:var(--accent)">ARCHITECT</span><br>ถนัดห้อง Cleanroom และระบบ HVAC</div></div></div>
+<div class="proof"><div class="proof-h"><span class="eyebrow">EXECUTIVE TRACKING DASHBOARD</span><b>ดูความคืบหน้า อนุมัติแบบผ่านมือถือ</b></div>
+<div class="proof-b dark"><div style="display:flex;justify-content:space-between;font-size:14px"><span>โครงสร้างเหล็ก (PEB)</span><span class="num">68%</span></div><div class="bar" aria-hidden="true"><i style="width:68%"></i></div><div style="display:flex;justify-content:space-between;font-size:14px"><span>งานระบบ MEP</span><span class="num">24%</span></div><div class="bar" aria-hidden="true"><i style="width:24%"></i></div><div style="margin-top:6px;padding:12px;border:1px solid var(--night-line);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px"><span style="font-size:13px">Shop Drawing ชั้น 2 รออนุมัติ</span><button class="btn primary" type="button" id="approveBtn" style="min-height:36px;padding:0 14px;font-size:13px">อนุมัติ</button></div><small style="font-size:11px;color:var(--on-night-muted)">ตัวเลขในภาพเป็นตัวอย่าง</small></div></div>
+<div class="proof"><div class="proof-h"><span class="eyebrow">SMART CONTRACT &amp; STANDARDIZED BOQ</span><b>เป็นธรรมกับทั้งสองฝ่าย</b></div>
+<div class="proof-b" style="gap:0"><div class="row"><span>งวด 1 · งานฐานราก</span><span class="st" style="color:var(--ok)">PAID</span></div><div class="row"><span>งวด 2 · โครงสร้าง</span><span class="st" style="color:var(--accent)">IN ESCROW</span></div><div class="row"><span>งวด 3 · งานระบบ</span><span class="st" style="color:var(--muted)">LOCKED</span></div><div class="row" style="border:0"><span>งวด 4 · ส่งมอบ</span><span class="st" style="color:var(--muted)">LOCKED</span></div><span style="margin-top:12px;font-size:13px;color:var(--ink-2)">เทมเพลตสัญญาและ BOQ มาตรฐาน ลดความขัดแย้งเรื่องการตีความวัสดุ</span></div></div>
+</div>
+</section>
+
+<section class="wrap sec" id="ai">
+<div class="sec-head">
+<div><div class="eyebrow">01 · AI VISUAL CONCEPT GENERATOR</div><h2 class="h2">อัปโหลดรูปห้องหรือที่ดิน<br>เห็นคอนเซปต์แรกในไม่กี่วินาที</h2></div>
+<p class="lead" style="max-width:420px">ภาพคอนเซปต์เป็นภาพสเก็ตช์เบื้องต้นเพื่อคุยกับสถาปนิก ไม่ใช่แบบก่อสร้าง</p>
+</div>
+<div class="tool">
+<div class="panel">
+<div style="display:flex;flex-direction:column;gap:8px">
+<span class="field-l">1. รูปพื้นที่เดิม</span>
+<label class="drop" for="upload"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></svg><span id="uploadLabel">แตะเพื่อเลือกรูปห้องเปล่าหรือที่ดิน</span><small>JPG หรือ PNG</small></label>
+<input class="sr" id="upload" type="file" accept="image/*">
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<span class="field-l">2. สไตล์ที่อยากได้</span>
+<div class="chips" id="styles" role="group" aria-label="เลือกสไตล์"></div>
+</div>
+<button class="btn primary" type="button" id="genBtn" style="align-self:flex-start">สร้างภาพคอนเซปต์</button>
+</div>
+<div class="concept">
+<div class="concept-frame" id="cFrame">
+<img id="cPhoto" alt="" hidden>
+<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" id="cLine" stroke-width="1.4"><path d="M0 500 L250 330 L550 330 L800 500"/><path d="M250 330 L250 70 L550 70 L550 330"/><path d="M0 0 L250 70 M800 0 L550 70"/><path d="M300 330 L300 140 L420 140 L420 330"/><path d="M460 200 L530 200 L530 300 L460 300 Z"/><path d="M80 470 L200 390 L380 390 L300 470 Z"/><path d="M600 420 L700 360 L760 380 L660 450 Z"/></g><g id="cFill" opacity=".85"><rect x="460" y="200" width="70" height="100"/><path d="M80 470 L200 390 L380 390 L300 470 Z"/></g></svg>
+<span class="tag" id="cTag">PREVIEW</span>
+<div class="empty" id="cEmpty">ภาพคอนเซปต์จะแสดงที่นี่</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center"><div class="sw" id="cSw"><span style="font-size:13px;color:var(--muted)">โทนสีแนะนำ</span></div><span style="font-size:14px;color:var(--ink-2)" id="cMat"></span></div>
+<button class="link" type="button" data-open-chat data-chat-msg="ช่วยแนะนำสถาปนิกสำหรับคอนเซปต์ที่ฉันเลือกหน่อย">ส่งคอนเซปต์นี้ให้สถาปนิก →</button>
+</div>
+</div>
+</section>
+
+<section class="wrap sec" id="boq" style="border-top:1px solid var(--line)">
+<div class="sec-head">
+<div><div class="eyebrow">02 · ROUGH BOQ ESTIMATOR</div><h2 class="h2">รู้ช่วงงบก่อนคุย<br>ไม่ต้องกลัวงบบานปลาย</h2></div>
+<p class="lead" style="max-width:420px">ประเมินจากประเภทอาคาร พื้นที่ใช้สอย และระดับสเปก แล้วจับคู่กับผู้รับเหมาเกรดที่ตรงงบ</p>
+</div>
+<div class="boq">
+<div class="boq-in">
+<div style="display:flex;flex-direction:column;gap:10px"><span class="field-l">ประเภทอาคาร</span><div class="chips" id="types" role="group" aria-label="ประเภทอาคาร"></div></div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><label class="field-l" for="area">พื้นที่ใช้สอย</label><span class="num" style="font:400 22px var(--f-display)"><span id="areaText">250</span> ตร.ม.</span></div>
+<input id="area" type="range" min="50" max="5000" step="10" value="250">
+<div class="mono" style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>50</span><span>5,000 ตร.ม.</span></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px"><span class="field-l">ระดับสเปก</span><div class="specs" id="specs" role="group" aria-label="ระดับสเปก"></div></div>
+</div>
+<div class="boq-out" aria-live="polite">
+<span class="eyebrow">ESTIMATED BUDGET</span>
+<div class="total num" id="total"></div>
+<div style="border-top:1px solid var(--night-line)">
+<div class="r"><span>อัตราต่อ ตร.ม.</span><span class="num" id="rate"></span></div>
+<div class="r"><span>ค่าออกแบบโดยประมาณ (5–8%)</span><span class="num" id="fee"></span></div>
+<div class="r"><span>ผู้รับเหมาที่ระบบจับคู่</span><span id="grade"></span></div>
+</div>
+<small style="font-size:12px">อัตราประเมินเบื้องต้น ยังไม่รวมค่าที่ดิน งานระบบพิเศษ และเฟอร์นิเจอร์ลอยตัว</small>
+<button class="btn primary" type="button" id="boqChat" style="align-self:flex-start">ต้องการพูดคุยกับสถาปนิกโดยตรง</button>
+</div>
+</div>
+</section>
+
+<section id="flow" style="background:var(--mist);border-block:1px solid var(--line)">
+<div class="wrap sec" style="display:flex;flex-direction:column;gap:40px">
+<div><div class="eyebrow">03 · FROM CHAT TO MEETING</div><h2 class="h2">AI รู้ว่าเมื่อไหร่ควรส่งต่อให้คน</h2></div>
+<div class="steps">
+<div class="step"><span class="eyebrow">STEP 01 · INTENT DETECTION</span><b>จับสัญญาณพร้อมซื้อ</b><span>เมื่อลูกค้าถาม "อยากทราบราคา" "ต้องเตรียมงบเท่าไหร่" หรือ "เริ่มงานได้เมื่อไหร่"</span></div>
+<div class="step"><span class="eyebrow">STEP 02 · CTA TRIGGER</span><b>เสนอคุยกับสถาปนิกตัวจริง</b><span>ปุ่มนัดหมายขึ้นในแชตเฉพาะจังหวะที่เหมาะสม ไม่รบกวนคนที่แค่หาไอเดีย</span></div>
+<div class="step"><span class="eyebrow">STEP 03 · CALENDAR</span><b>เลือกวันเวลาประชุม</b><span>ประชุมผ่าน Google Meet หรือนัดพบที่สำนักงาน</span></div>
+<div class="step"><span class="eyebrow">STEP 04 · BOOKING TICKET</span><b>ได้เลข Booking ทันที</b><span>ติดตามสถานะได้ในหน้า My Project Status</span></div>
+</div>
+<div class="cards2">
+<div class="card2"><span class="eyebrow">COMPLEXITY ESCALATION</span><b style="font:500 20px var(--f-display)">คำถามซับซ้อน ส่งถึงสถาปนิกอาวุโส</b><span style="font-size:14px;color:var(--ink-2)">เช่น การคำนวณโหลดโครงสร้าง หรือข้อกฎหมายผังเมืองเฉพาะจุด AI จะขอเบอร์โทร LINE ID หรือ WhatsApp ให้ทีมติดต่อกลับ</span><button class="link" type="button" data-open-chat data-chat-msg="คำนวณโหลดคานยื่น 6 เมตรให้หน่อย" style="align-self:flex-start">ลองในแชต →</button></div>
+<div class="card2 urgent"><span class="eyebrow" style="color:var(--urgent-text)">URGENT · FAST-TRACK</span><b style="font:500 20px var(--f-display)">โปรเจกต์เร่งด่วน?</b>
+<div id="urgentIdle" style="display:flex;flex-direction:column;gap:12px"><span style="font-size:14px;color:var(--ink-2)">ทีมบริหารโครงการจะได้รับแจ้งเตือนทันที และแชตของคุณจะถูกจัดเป็นลำดับความสำคัญสูงสุด</span><button class="btn danger" type="button" id="urgentBtn" style="align-self:flex-start">ติดต่อด่วน (Urgent / Fast-Track)</button></div>
+<div id="urgentDone" hidden role="status"><div class="ack">บริษัทได้รับความต้องการเร่งด่วนของท่านแล้ว ทีมบริหารโครงการจะทำการติดต่อกลับภายใน 30 นาที</div><span class="mono" style="font-size:12px;letter-spacing:.1em;color:var(--muted)" id="urgentNo"></span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="wrap sec" style="display:flex;flex-wrap:wrap;gap:40px;align-items:center">
+<div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:16px">
+<div class="eyebrow">FOR STUDIOS · UNIFIED INBOX</div>
+<h2 class="h2" style="margin:0">ทุกช่องทางในกล่องเดียว<br>อ่านจบใน 3 วินาที</h2>
+<p class="lead">รวมแชตจากเว็บ LINE WhatsApp Facebook และอีเมล AI สรุปใจความสำคัญของลูกค้าแต่ละรายแนบมากับทุกข้อความ งานด่วนไฮไลต์สีแดงอัตโนมัติ</p>
+<a class="btn outline" href="/admin" style="align-self:flex-start">ดูตัวอย่างหลังบ้าน</a>
+</div>
+<div class="inbox-mini">
+<div class="hot"><span class="mono" style="font-size:11px;letter-spacing:.12em;color:var(--urgent-text)">URGENT</span><span style="display:flex;flex-direction:column;min-width:0"><b style="font-weight:500;font-size:14px">[ลูกค้า A] · LINE</b><span style="font-size:13px;color:var(--ink-2)">[AI: ต้องการรีโนเวตร้านอาหาร เปิดเดือนหน้า เร่งด่วน]</span></span></div>
+<div><span class="mono" style="font-size:11px;letter-spacing:.12em;color:var(--accent)">INTENT</span><span style="display:flex;flex-direction:column;min-width:0"><b style="font-weight:500;font-size:14px">[ลูกค้า B] · Web chat</b><span style="font-size:13px;color:var(--ink-2)">[AI: ต้องการสร้างโรงแรม 5 ดาว ภูเก็ต งบ 100 ล้าน สไตล์ Tropical]</span></span></div>
+<div><span class="mono" style="font-size:11px;letter-spacing:.12em;color:var(--muted)">INFO</span><span style="display:flex;flex-direction:column;min-width:0"><b style="font-weight:500;font-size:14px">[ลูกค้า C] · WhatsApp</b><span style="font-size:13px;color:var(--ink-2)">[AI: สอบถามไอเดียห้องนอนเด็ก ยังไม่มีงบชัดเจน]</span></span></div>
+</div>
+</section>
+</main>
+
+<footer><div class="wrap"><span style="font:600 18px var(--f-display);letter-spacing:.2em;color:var(--ink)">DEBUT</span><span>© 2026 DEBUT · BAUHAUS DESIGN (THAILAND) CO., LTD.</span></div></footer>
+
+<!-- Chat launcher + widget -->
+<div class="launch" id="launch">
+<div class="bubble" id="greet" role="status" hidden>สวัสดีครับ ผมเดบู ผู้ช่วยด้านการออกแบบ เล่าโปรเจกต์ให้ฟังได้เลยครับ<button type="button" id="greetClose" aria-label="ปิดข้อความทักทาย"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+<button class="fab" type="button" data-open-chat aria-label="เปิดแชตกับเดบู"><svg width="46" height="46" viewBox="0 0 120 120" aria-hidden="true"><use href="#mascot"/></svg></button>
+</div>
+
+<div class="chat" id="chat" role="dialog" aria-label="แชตกับเดบู ผู้ช่วยด้านการออกแบบ" hidden>
+<div class="chat-head">
+<button class="ib" type="button" id="chatBack" aria-label="กลับไปที่แชต" hidden><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+<div class="av"><svg width="34" height="34" viewBox="0 0 120 120" aria-hidden="true"><use href="#mascot"/></svg></div>
+<div class="who"><b id="chatTitle">เดบู · ผู้ช่วยด้านการออกแบบ</b><span><span class="dot"></span><span id="chatSub">ออนไลน์ ตอบทันที</span></span></div>
+<button class="ib" type="button" id="chatClose" aria-label="ปิดแชต"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
+<div id="vChat" style="flex:1;min-height:0;display:flex;flex-direction:column">
+<div class="log" id="log" aria-live="polite"></div>
+<div class="quick" id="quick"></div>
+<form class="chat-in" id="chatForm">
+<button class="round" type="button" id="chatMic" aria-label="พูดด้วยเสียง" aria-pressed="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+<label class="sr" for="msg">พิมพ์ข้อความ</label>
+<input id="msg" type="text" autocomplete="off" placeholder="พิมพ์หรือกดไมค์เพื่อพูด" maxlength="1000">
+<button class="round send" type="submit" aria-label="ส่งข้อความ"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+</form>
+<div class="foot">คำตอบจาก AI เป็นแนวทางเบื้องต้น งานขออนุญาตและโครงสร้างควรปรึกษาสถาปนิกและวิศวกรที่มีใบอนุญาต</div>
+</div>
+<div id="vBook" style="flex:1;min-height:0;display:flex;flex-direction:column" hidden>
+<div class="book">
+<div><span class="eyebrow" style="font-size:11px">เลือกเวลาที่สถาปนิกว่าง</span><h3>เลือกวันและเวลาประชุม</h3></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span class="field-l">วัน</span><div class="days" id="days"></div><span style="font-size:12px;color:var(--muted)" id="monthLabel"></span></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span class="field-l">เวลา</span><div class="times" id="times"></div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><span class="field-l">รูปแบบการประชุม</span><div class="modes" id="modes"></div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><label class="field-l" for="bEmail">อีเมลสำหรับรับใบยืนยัน</label><input id="bEmail" type="email" placeholder="you@example.com" style="min-height:44px;padding:0 12px;border:1px solid var(--line)"></div>
+</div>
+<div class="book-foot"><span style="font-size:13px;color:var(--ink-2)" id="bookSum"></span><span style="font-size:13px;color:var(--urgent-text)" id="bookErr" hidden></span><button class="btn primary" type="button" id="bookConfirm">ยืนยันนัดหมาย</button></div>
+</div>
+<div id="vTicket" style="flex:1;min-height:0;display:flex;flex-direction:column" hidden>
+<div class="ticket">
+<div class="ticket-card"><div class="hd"><span class="eyebrow" style="color:var(--on-night-muted)">BOOKING CONFIRMED</span><b id="tNo"></b></div>
+<div class="bd"><div class="row"><span style="color:var(--muted)">วันเวลา</span><span id="tWhen"></span></div><div class="row"><span style="color:var(--muted)">รูปแบบ</span><span id="tMode"></span></div><div class="row" style="border:0"><span style="color:var(--muted)">อีเมล</span><span id="tEmail" style="overflow-wrap:anywhere;text-align:right"></span></div></div></div>
+<div style="padding:14px;background:#fff;font-size:14px">ทีมงานจะยืนยันนัดและส่งลิงก์ประชุมไปทางอีเมลภายใน 1 วันทำการ เก็บเลข Booking ไว้ใช้ตรวจสถานะครับ</div>
+<a class="btn primary" id="tStatus" href="/status">ดูสถานะใน My Project Status</a>
+<button class="btn outline" type="button" id="tBack">กลับไปคุยกับเดบูต่อ</button>
+</div>
+</div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="mascot"><path d="M60 14 L104 50 L104 104 Q104 110 98 110 L22 110 Q16 110 16 104 L16 50 Z" fill="#F6C945" stroke="#111" stroke-width="4" stroke-linejoin="round"/><rect x="52" y="34" width="16" height="10" rx="2" fill="#2438D6"/><circle cx="45" cy="68" r="6" fill="#111"/><circle cx="75" cy="68" r="6" fill="#111"/><circle cx="47" cy="66" r="2" fill="#fff"/><circle cx="77" cy="66" r="2" fill="#fff"/><ellipse cx="35" cy="80" rx="7" ry="4.5" fill="#F49AA0"/><ellipse cx="85" cy="80" rx="7" ry="4.5" fill="#F49AA0"/><path d="M52 82 Q60 90 68 82" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/></g></defs></svg>
+
+<script src="/assets/chat.js"></script>
+<script src="/assets/home.js"></script>
+</body>
+</html>
