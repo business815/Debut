@@ -76,7 +76,7 @@
 
 <section class="debu" id="debu">
 <div class="wrap debu-in">
-<figure class="debu-hero"><img src="/assets/debu.jpg" alt="น้องเดบู มาสคอตของ DEBUT ถือดินสอและม้วนแบบ" width="410" height="490"></figure>
+<figure class="debu-hero" data-debu-live="full"><img src="/assets/debu.jpg" alt="น้องเดบู มาสคอตของ DEBUT ถือดินสอและม้วนแบบ" width="410" height="490"></figure>
 <div class="debu-copy">
 <div class="eyebrow">DEBU · THE LITTLE ARCHITECT</div>
 <p class="script">Little ideas, beautiful spaces.</p>
@@ -290,13 +290,13 @@
 <!-- Chat launcher + widget -->
 <div class="launch" id="launch">
 <div class="bubble" id="greet" role="status" hidden>สวัสดีครับ ผมน้องเดบู สถาปนิกตัวน้อยของ DEBUT มีไอเดียเล็กๆ เล่าให้ฟังได้เลยครับ<button type="button" id="greetClose" aria-label="ปิดข้อความทักทาย"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-<button class="fab" type="button" data-open-chat aria-label="เปิดแชตกับเดบู"><img src="/assets/debu-avatar.jpg" alt="" width="64" height="64"></button>
+<button class="fab" type="button" data-open-chat aria-label="เปิดแชตกับเดบู"><span class="fab-in" data-debu-live="avatar"><img src="/assets/debu-avatar.jpg" alt="" width="64" height="64"></span></button>
 </div>
 
 <div class="chat" id="chat" role="dialog" aria-label="แชตกับเดบู ผู้ช่วยด้านการออกแบบ" hidden>
 <div class="chat-head">
 <button class="ib" type="button" id="chatBack" aria-label="กลับไปที่แชต" hidden><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
-<div class="av"><img src="/assets/debu-avatar.jpg" alt="" width="40" height="40"></div>
+<div class="av" data-debu-live="avatar" data-debu-pose data-pose="idle"><img src="/assets/debu-avatar.jpg" alt="" width="44" height="44"></div>
 <div class="who"><b id="chatTitle">เดบู · ผู้ช่วยด้านการออกแบบ</b><span><span class="dot"></span><span id="chatSub">ออนไลน์ ตอบทันที</span></span></div>
 <button class="ib" type="button" id="chatClose" aria-label="ปิดแชต"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
 </div>
@@ -354,6 +354,7 @@
 </div>
 
 <script src="/assets/debu-kb.js"></script>
+<script src="/assets/debu-live.js"></script>
 <script src="/assets/chat.js"></script>
 <script src="/assets/home.js"></script>
 </body>

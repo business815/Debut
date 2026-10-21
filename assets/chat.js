@@ -79,9 +79,20 @@
     log.scrollTop = log.scrollHeight;
     return d;
   }
+  function pose(name, hold) {
+    document.dispatchEvent(new CustomEvent('debu:pose', { detail: { pose: name, hold: hold } }));
+  }
+  var POSE_OF = {
+    styles: 'present', 'style-japan': 'present', 'style-europe': 'present', 'style-tropical': 'present', 'style-luxury': 'present',
+    'style-parametric': 'present', global: 'present', idea: 'sketch', boq: 'sketch', cost: 'sketch', 'design-fee': 'sketch',
+    structure: 'site', permit: 'site', renovate: 'site', area: 'site', landscape: 'site', timeline: 'site',
+    hotel: 'model', hospital: 'model', mall: 'model', house: 'model', office: 'model', specialist: 'model'
+  };
+
   function typing(cb, len) {
+    pose('think');
     var t = bubble('<span class="typing"><i></i><i></i><i></i></span>', 'bot');
-    setTimeout(function () { t.remove(); cb(); }, Math.min(1100, 350 + (len || 80) * 2));
+    setTimeout(function () { t.remove(); pose('idle'); cb(); }, Math.min(1100, 350 + (len || 80) * 2));
   }
   function ctaRow(kinds) {
     var row = document.createElement('div');
@@ -126,6 +137,7 @@
     var html = (Array.isArray(paras) ? paras : [paras]).map(function (p) { return '<p>' + p + '</p>'; }).join('');
     typing(function () {
       bubble(html, 'bot');
+      if (opts.pose) pose(opts.pose, 7000);
       state.answered++;
       var cta = opts.cta ? [opts.cta] : [];
       var elapsed = Date.now() - state.started;
@@ -171,7 +183,7 @@
   }
   function answer(entry) {
     state.lastTopic = entry.id;
-    say(entry.a, { next: entry.next, cta: entry.cta });
+    say(entry.a, { next: entry.next, cta: entry.cta, pose: POSE_OF[entry.id] });
   }
 
   function norm(s) {
@@ -213,7 +225,7 @@
     typing(function () {
       bubble('<p>เดบูสรุป Brief ของคุณได้แบบนี้ครับ</p>' + card, 'bot');
       say(entry.a.concat(['จากข้อมูลนี้ ทีมสามารถคัด <b>ผู้เชี่ยวชาญเฉพาะด้าน' + t.label + '</b> พร้อมประเมินงบเบื้องต้นให้ได้ทันทีครับ']),
-        { next: entry.next.concat(style ? [style.id] : []), cta: 'book' });
+        { next: entry.next.concat(style ? [style.id] : []), cta: 'book', pose: 'sketch' });
     }, 120);
     return true;
   }
@@ -227,7 +239,7 @@
     if (score(text, KB.escalate) > 0) {
       say(['คำถามนี้ต้องใช้การคำนวณจาก <b>วิศวกรที่มีใบอนุญาต</b> ครับ เพื่อความปลอดภัย เดบูจะไม่เดาตัวเลขให้',
         'ฝากชื่อและเบอร์โทร หรือ LINE ID ไว้ในแบบฟอร์มสมาชิก วิศวกรอาวุโสจะติดต่อกลับพร้อมคำตอบที่ถูกต้องครับ'],
-        { next: ['structure', 'permit'], cta: 'join' });
+        { next: ['structure', 'permit'], cta: 'join', pose: 'site' });
       return;
     }
     if (brief(text, raw)) return;
@@ -349,6 +361,7 @@
     $('mContact').textContent = phone + ' · ' + email;
     quick.innerHTML = '';
     show('joined');
+    pose('model', 9000);
   });
   $('mBook').onclick = book;
   $('mBack').onclick = function () {

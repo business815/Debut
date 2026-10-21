@@ -312,6 +312,25 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .ticket-card .row { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
 .ticket .btn { width: 100%; }
 
+/* live Debu: breathing, blinking, pointer tilt, chat poses */
+.debu-live { position: relative; display: block; overflow: hidden; transform: perspective(700px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .3s ease-out; }
+.debu-body { position: absolute; inset: 0; display: block; transform-origin: 50% 85%; animation: breathe 4.2s ease-in-out infinite; }
+.debu-body > img { width: 100%; height: 100%; object-fit: cover; transform: translate(var(--px, 0px), var(--py, 0px)) scale(1.06); transition: transform .3s ease-out; }
+.lids { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; transform: translate(var(--px, 0px), var(--py, 0px)) scale(1.06); transition: transform .3s ease-out; }
+.lid { opacity: 0; transition: opacity .05s; }
+.blink .lid { opacity: 1; }
+@keyframes breathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.012, 1.028); } }
+.fab-in { width: 100%; height: 100%; border-radius: 50%; }
+.debu-hero.debu-live { transition: transform .4s ease-out, box-shadow .4s; }
+.av.debu-live { border-radius: 50%; }
+.av .debu-body > img { transition: opacity .16s, transform .3s ease-out; }
+.av.swap .debu-body > img { opacity: 0; }
+.av:not([data-pose="idle"]) .lids { display: none; }
+.av:not([data-pose="idle"]) .debu-body > img { object-position: 50% 22%; transform: scale(1.5) translateY(12%); }
+.av:not([data-pose="idle"]) .debu-body { animation: hop .45s ease-out, breathe 4.2s ease-in-out .45s infinite; }
+@keyframes hop { 40% { transform: translateY(-8%) scale(1.04); } }
+.chat-head .av { width: 46px; height: 46px; }
+
 /* responsive */
 @media (max-width: 1080px) {
   .nav { gap: 16px; }
