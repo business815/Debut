@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500&family=IBM+Plex+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/extra.css">
 </head>
 <body>
 
@@ -19,11 +20,11 @@
 <b>DEBUT</b>
 </a>
 <nav class="nav" id="nav" aria-label="เมนูหลัก">
-<a href="#why">WHY DEBUT</a><a href="#debu">น้องเดบู</a><a href="#ai">AI STUDIO</a><a href="#boq">ESTIMATOR</a><a href="#faq">FAQ</a><a href="#member">MEMBERSHIP</a><a href="/status">MY PROJECT</a>
+<a href="#works">WORKS</a><a href="#ai">AI STUDIO</a><a href="#boq">ESTIMATOR</a><a href="#trial">FREE TRIAL</a><a href="#global">GLOBAL</a><a href="#films" data-open-films>FILMS</a><a href="/status">MY PROJECT</a>
 </nav>
 <div class="top-right">
 <span class="lang"><b>TH</b> / EN</span>
-<button class="btn dark" type="button" data-open-join>สมัครสมาชิก</button>
+<button class="btn dark" type="button" data-open-chat>คุยกับสถาปนิก</button>
 <button class="menu-btn" type="button" id="menuBtn" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="nav"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
 </div>
 </div>
@@ -32,6 +33,8 @@
 <main>
 <section class="hero" id="top">
 <canvas id="heroFlow" aria-hidden="true"></canvas>
+<div class="hero-art" id="heroArt" aria-hidden="true"></div>
+<span class="hero-cap mono" id="heroArtCap" aria-hidden="true"></span>
 <div class="wrap">
 <div class="eyebrow">AI DESIGN PLATFORM · BIG DATA · VERIFIED STUDIOS</div>
 <h1>เล่าโปรเจกต์ของคุณ<br>AI ช่วยประเมินงบ สร้างคอนเซปต์<br>และนัด<em>สถาปนิกตัวจริง</em>ให้ทันที</h1>
@@ -74,34 +77,6 @@
 </div>
 </section>
 
-<section class="debu" id="debu">
-<div class="wrap debu-in">
-<figure class="debu-hero" data-debu-live="full"><img src="/assets/debu.jpg" alt="น้องเดบู มาสคอตของ DEBUT ถือดินสอและม้วนแบบ" width="410" height="490"></figure>
-<div class="debu-copy">
-<div class="eyebrow">DEBU · THE LITTLE ARCHITECT</div>
-<p class="script">Little ideas, beautiful spaces.</p>
-<h2 class="h2">น้องเดบู<br>สถาปนิกตัวน้อยที่ชอบสังเกต</h2>
-<p class="lead">ชอบออกแบบ และเชื่อว่าทุกพื้นที่มีจุดเริ่มต้นของเรื่องราวที่สวยงาม เดบูคือผู้ช่วย AI ที่จะฟังไอเดียเล็กๆ ของคุณ แล้วส่งต่อให้ทีมผู้ออกแบบและผู้รับเหมาที่ผ่านการคัดกรองแล้ว</p>
-<div class="debu-icons">
-<span><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19z"/><path d="M14 7l3 3"/></svg>Design<br>&amp; Draw</span>
-<span><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>Plan<br>&amp; Create</span>
-<span><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V9h5v12M9 21V4h6v17M15 21v-9h5v9M3 21h18"/></svg>Build<br>&amp; Make it Real</span>
-</div>
-<button class="btn primary" type="button" data-open-chat style="align-self:flex-start">คุยกับน้องเดบู</button>
-</div>
-</div>
-<div class="wrap">
-<ol class="journey">
-<li><img src="/assets/debu-1.jpg" alt="" loading="lazy" width="192" height="286"><b>SKETCH</b><span>วาดฝันจากจินตนาการ</span></li>
-<li><img src="/assets/debu-2.jpg" alt="" loading="lazy" width="188" height="286"><b>SITE VISIT</b><span>ออกไปดูพื้นที่จริง</span></li>
-<li><img src="/assets/debu-3.jpg" alt="" loading="lazy" width="181" height="286"><b>MODEL</b><span>สร้างโมเดลเพื่อให้เห็นภาพ</span></li>
-<li><img src="/assets/debu-4.jpg" alt="" loading="lazy" width="185" height="286"><b>PRESENT</b><span>นำเสนอไอเดีย</span></li>
-<li><img src="/assets/debu-5.jpg" alt="" loading="lazy" width="186" height="286"><b>CONSULT</b><span>ใส่ใจในทุกรายละเอียด</span></li>
-<li><img src="/assets/debu-6.jpg" alt="" loading="lazy" width="188" height="286"><b>ENJOY</b><span>เพราะทุกพื้นที่คือชีวิต</span></li>
-</ol>
-</div>
-</section>
-
 <section class="wrap sec" id="why" style="padding-bottom:40px">
 <div class="eyebrow">WHY DEBUT · ECOSYSTEM OF TRUST</div>
 <h2 class="why-h" style="margin-top:20px">Seamless Architecture &amp; Construction<br>จบทุกความกังวล เชื่อมวิสัยทัศน์สู่ความจริง<br>ด้วยมาตรฐานระดับสากล</h2>
@@ -141,8 +116,23 @@
 <div class="pt"><b>Guaranteed Cash Flow · ทำงานได้เงินชัวร์</b><span>ล็อกงบตามงวดงานตั้งแต่เซ็นสัญญา ส่งมอบผ่านเกณฑ์แล้วได้รับเงินตรงเวลา</span></div>
 <div class="pt"><b>Focus on Creation · เรื่องจัดการเราดูแลให้</b><span>ใช้เครื่องมือ Project Management ระบบออกใบแจ้งหนี้ และปฏิทินส่งมอบงานได้ฟรี</span></div>
 </div>
-<a class="btn ghost-light" href="/admin" style="align-self:flex-start">ดูระบบหลังบ้านสำหรับพาร์ทเนอร์</a>
+<button class="btn ghost-light" type="button" data-open-chat data-chat-msg="สนใจสมัครเป็นสตูดิโอพาร์ทเนอร์ของ DEBUT" style="align-self:flex-start">สมัครเป็นสตูดิโอพาร์ทเนอร์</button>
 </div>
+</div>
+</section>
+
+<section class="works" id="works">
+<div class="wrap sec">
+<div class="sec-head">
+<div><div class="eyebrow">WORLD-CLASS CONCEPTS · DEBUT NETWORK</div><h2 class="h2">งานออกแบบระดับโลก<br>จากสตูดิโอในเครือข่าย DEBUT</h2></div>
+<p class="lead">ตั้งแต่บ้านไทยยกใต้ถุน บ้านญี่ปุ่นโบราณ รีสอร์ต 5 ดาว แฟล็กชิปสโตร์แบรนด์หรู จนถึงสนามกีฬาโอลิมปิกและห้างสรรพสินค้าสำหรับโลกอีก 40 ปีข้างหน้า</p>
+</div>
+<div class="via">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+<span><b>ทุกสตูดิโอเป็นพาร์ทเนอร์ของ BAUHAUS DESIGN (THAILAND)</b> ลูกค้าติดต่อ พูดคุย ส่งแบบ และทำสัญญาผ่านแพลตฟอร์ม DEBUT เท่านั้น เพื่อคุ้มครองทั้งเจ้าของโครงการและนักออกแบบ</span>
+</div>
+<div class="works-grid" id="worksGrid"></div>
+<p class="fine">* ชื่อโครงการ สตูดิโอ ที่ตั้ง และขนาดพื้นที่ในส่วนนี้เป็นตัวอย่างสมมุติ (Concept Showcase) เพื่อแสดงแนวทางการออกแบบ ภาพเป็นภาพลายเส้นประกอบ</p>
 </div>
 </section>
 
@@ -240,12 +230,77 @@
 </div>
 </section>
 
+<section class="wrap sec trial" id="trial">
+<div class="trial-l">
+<div class="eyebrow">FREE TRIAL · 30 DAYS</div>
+<h2 class="h2">ทดลองใช้บริการสถาปนิก<br><em>ฟรี 30 วัน</em></h2>
+<p class="lead">สำหรับลูกค้าช่วงเปิดตัว ได้คุยกับสถาปนิกตัวจริงและใช้เครื่องมือ AI ครบทุกอย่างโดยไม่มีค่าใช้จ่ายใน 30 วันแรก</p>
+<ul class="trial-list">
+<li><b>ปรึกษาสถาปนิกตัวจริง 2 ครั้ง</b><span>ครั้งละ 60 นาที ผ่าน Google Meet หรือที่สำนักงาน</span></li>
+<li><b>AI Concept ไม่จำกัด</b><span>สร้างภาพคอนเซปต์และโทนวัสดุได้ทุกสไตล์</span></li>
+<li><b>ประเมินงบ BOQ เบื้องต้น</b><span>พร้อมคำแนะนำปรับสเปกให้ตรงงบ</span></li>
+<li><b>จับคู่สตูดิโอในเครือข่าย</b><span>คุยและส่งไฟล์ผ่าน DEBUT อย่างปลอดภัย</span></li>
+</ul>
+<ol class="trial-steps">
+<li><span class="mono">01</span>กรอกข้อมูลโครงการ</li>
+<li><span class="mono">02</span>ยืนยันบัตรบนหน้าชำระเงินของ Stripe ไม่ตัดเงินระหว่างทดลอง</li>
+<li><span class="mono">03</span>เริ่มคุยกับสถาปนิกภายใน 1 วันทำการ</li>
+</ol>
+</div>
+<form class="trial-card" id="trialForm" novalidate>
+<div class="trial-card-h"><span class="eyebrow" style="color:var(--on-night-muted)">START YOUR TRIAL</span><b>เริ่มทดลองใช้ฟรี</b><span class="trial-price"><span class="num">฿0</span> สำหรับ 30 วันแรก</span></div>
+<div class="trial-card-b">
+<label class="field-l" for="trName">ชื่อ-นามสกุล หรือชื่อบริษัท</label><input id="trName" autocomplete="name" required>
+<label class="field-l" for="trEmail">อีเมล</label><input id="trEmail" type="email" autocomplete="email" placeholder="you@company.com" required>
+<label class="field-l" for="trPhone">เบอร์โทร</label><input id="trPhone" type="tel" autocomplete="tel" placeholder="08x-xxx-xxxx">
+<label class="field-l" for="trProject">ประเภทโครงการ</label>
+<select id="trProject"><option>บ้านพักอาศัย</option><option>รีโนเวต / ตกแต่งภายใน</option><option>โรงแรม / รีสอร์ต</option><option>ร้านค้า / แบรนด์</option><option>เวลเนส / สปา</option><option>อาคารพาณิชย์ / สำนักงาน</option><option>อื่นๆ</option></select>
+<div class="pay-box">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
+<span><b>บัตรเครดิต / เดบิต</b> กรอกบนหน้าชำระเงินที่ปลอดภัยของ Stripe ในขั้นถัดไป เว็บไซต์ DEBUT ไม่เก็บเลขบัตรของคุณ<small>Visa · Mastercard · JCB · AMEX</small></span>
+</div>
+<label class="agree"><input type="checkbox" id="trAgree"> <span>ไม่มีค่าใช้จ่ายใน 30 วันแรก ยกเลิกได้ทุกเมื่อก่อนครบกำหนด หากไม่ยกเลิก ระบบจะเริ่มเรียกเก็บตามแพ็กเกจที่แสดงในหน้าชำระเงิน</span></label>
+<button class="btn primary" type="submit" id="trialBtn">เริ่มทดลองใช้ฟรี 30 วัน</button>
+<p class="trial-msg" id="trialMsg" role="status" hidden></p>
+</div>
+</form>
+</section>
+
+<section class="global" id="global">
+<div class="wrap sec">
+<div class="sec-head">
+<div><div class="eyebrow">HOSPITALITY &amp; EUROPE · GLOBAL CLIENTS</div><h2 class="h2">สำหรับเครือโรงแรมหรู<br>และบริษัทจากยุโรป</h2></div>
+<p class="lead">Design and build in Thailand with one accountable partner. Bilingual project management, international standards, all coordinated through DEBUT.</p>
+</div>
+<div class="g-cards">
+<div class="g-card">
+<span class="eyebrow">LUXURY HOTEL GROUPS</span>
+<h3>เครือโรงแรมและรีสอร์ตระดับ 5 ดาว</h3>
+<ul><li>ออกแบบตามมาตรฐานแบรนด์ (Brand Standards) ของเครือโรงแรม</li><li>แพ็กเกจตกแต่งภายในและ FF&amp;E ครบชุด</li><li>วางแผน Pre-opening และควบคุมไทม์ไลน์เปิดโรงแรม</li><li>ขยายหลายสาขาด้วยมาตรฐานเดียวกันทั่วไทย</li></ul>
+<button class="btn ghost-light" type="button" data-open-chat data-chat-msg="ขอข้อเสนอการออกแบบสำหรับเครือโรงแรม 5 ดาว">ขอข้อเสนอสำหรับโรงแรม →</button>
+</div>
+<div class="g-card">
+<span class="eyebrow">EUROPEAN PARTNERS · EU</span>
+<h3>Companies from Europe</h3>
+<ul><li>English-speaking project managers, weekly reports in CET</li><li>Eurocode-aware design coordinated with Thai building codes</li><li>Local permits, contractors and site supervision in Thailand</li><li>Secure milestone payments and contracts via DEBUT</li></ul>
+<button class="btn ghost-light" type="button" data-open-chat data-chat-msg="Hello, we are a European company planning a project in Thailand and would like a partnership proposal.">Partnership enquiry (EN) →</button>
+</div>
+</div>
+<div class="logos">
+<div class="logos-h"><span class="eyebrow">TRUSTED BY · ลูกค้าในเครือ</span><span class="logos-note">พื้นที่สำหรับโลโก้ลูกค้าจริง แสดงเมื่อได้รับอนุญาตจากลูกค้าแล้ว</span></div>
+<div class="logo-wall">
+<span>HOTEL GROUP</span><span>RESORT &amp; SPA</span><span>BOUTIQUE HOTEL</span><span>EU PARTNER</span><span>EU PARTNER</span><span>RETAIL BRAND</span><span>WELLNESS</span><span>DEVELOPER</span>
+</div>
+</div>
+</div>
+</section>
+
 <section class="wrap sec" style="display:flex;flex-wrap:wrap;gap:40px;align-items:center">
 <div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:16px">
 <div class="eyebrow">FOR STUDIOS · UNIFIED INBOX</div>
 <h2 class="h2" style="margin:0">ทุกช่องทางในกล่องเดียว<br>อ่านจบใน 3 วินาที</h2>
 <p class="lead">รวมแชตจากเว็บ LINE WhatsApp Facebook และอีเมล AI สรุปใจความสำคัญของลูกค้าแต่ละรายแนบมากับทุกข้อความ งานด่วนไฮไลต์สีแดงอัตโนมัติ</p>
-<a class="btn outline" href="/admin" style="align-self:flex-start">ดูตัวอย่างหลังบ้าน</a>
+<button class="btn outline" type="button" data-open-chat data-chat-msg="อยากทราบรายละเอียดระบบ Unified Inbox สำหรับสตูดิโอ" style="align-self:flex-start">สอบถามระบบสำหรับสตูดิโอ</button>
 </div>
 <div class="inbox-mini">
 <div class="hot"><span class="mono" style="font-size:11px;letter-spacing:.12em;color:var(--urgent-text)">URGENT</span><span style="display:flex;flex-direction:column;min-width:0"><b style="font-weight:500;font-size:14px">[ลูกค้า A] · LINE</b><span style="font-size:13px;color:var(--ink-2)">[AI: ต้องการรีโนเวตร้านอาหาร เปิดเดือนหน้า เร่งด่วน]</span></span></div>
@@ -253,50 +308,19 @@
 <div><span class="mono" style="font-size:11px;letter-spacing:.12em;color:var(--muted)">INFO</span><span style="display:flex;flex-direction:column;min-width:0"><b style="font-weight:500;font-size:14px">[ลูกค้า C] · WhatsApp</b><span style="font-size:13px;color:var(--ink-2)">[AI: สอบถามไอเดียห้องนอนเด็ก ยังไม่มีงบชัดเจน]</span></span></div>
 </div>
 </section>
-
-<section id="faq" style="background:var(--mist);border-block:1px solid var(--line)">
-<div class="wrap sec faq">
-<div class="faq-side">
-<div class="eyebrow">FAQ · ASK DEBU</div>
-<h2 class="h2">คำถามที่ลูกค้า<br>ถามเราบ่อยที่สุด</h2>
-<p class="lead">คำตอบสั้นๆ จากทีม DEBUT ถ้าอยากรู้ลึกกว่านี้ ถามน้องเดบูในแชตได้เลย ใช้เวลาไม่เกิน 5 นาที</p>
-<img src="/assets/debu-5.jpg" alt="" loading="lazy" class="faq-img" width="186" height="286">
-<button class="btn primary" type="button" data-open-chat style="align-self:flex-start">ถามน้องเดบู</button>
-</div>
-<div class="faq-list" id="faqList"></div>
-</div>
-</section>
-
-<section class="wrap sec" id="member">
-<div class="member">
-<div class="member-copy">
-<div class="eyebrow" style="color:var(--on-night-muted)">DEBUT MEMBERSHIP · EXECUTIVE PRIVILEGE</div>
-<h2 class="h2">สมัครสมาชิก<br>ซื้อความสบายใจตั้งแต่วันแรก</h2>
-<p>ศูนย์รวมผู้ออกแบบระดับสากลและช่างฝีมือที่ผ่านการคัดกรองแล้ว อยู่ที่นี่ที่เดียว และถ้าทีมไหนทำงานพลาด DEBUT รับผิดชอบหาทีมทดแทนให้ทันที</p>
-<button class="btn primary light" type="button" data-open-join style="align-self:flex-start">สมัครสมาชิกฟรีวันนี้</button>
-</div>
-<ul class="member-pts">
-<li><b>Top-Tier Shortlist</b><span>รายชื่อผู้ออกแบบและผู้รับเหมาที่ DNA ตรงกับโครงการ คัดมาให้ภายใน 3 วันทำการ</span></li>
-<li><b>Replacement Guarantee</b><span>ทีมเดิมผิดพลาด ล่าช้า หรือทิ้งงาน เราส่งทีมทดแทนมาตรฐานเท่ากันหรือสูงกว่าเข้ามาสานต่อ</span></li>
-<li><b>Secure Milestone Payment</b><span>เงินพักไว้ที่ระบบตัวกลาง จ่ายเมื่องานแต่ละงวดผ่านการตรวจ</span></li>
-<li><b>Dedicated Project Advisor</b><span>ที่ปรึกษาโครงการส่วนตัว พร้อม Dashboard ติดตามงานแบบ Real-time</span></li>
-</ul>
-</div>
-</section>
 </main>
 
 <footer><div class="wrap"><span style="font:600 18px var(--f-display);letter-spacing:.2em;color:var(--ink)">DEBUT</span><span>© 2026 DEBUT · BAUHAUS DESIGN (THAILAND) CO., LTD.</span></div></footer>
 
-<!-- Chat launcher + widget -->
 <div class="launch" id="launch">
-<div class="bubble" id="greet" role="status" hidden>สวัสดีครับ ผมน้องเดบู สถาปนิกตัวน้อยของ DEBUT มีไอเดียเล็กๆ เล่าให้ฟังได้เลยครับ<button type="button" id="greetClose" aria-label="ปิดข้อความทักทาย"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-<button class="fab" type="button" data-open-chat aria-label="เปิดแชตกับเดบู"><span class="fab-in" data-debu-live="avatar"><img src="/assets/debu-avatar.jpg" alt="" width="64" height="64"></span></button>
+<div class="bubble" id="greet" role="status" hidden>สวัสดีครับ ผมเดบู ผู้ช่วยด้านการออกแบบ เล่าโปรเจกต์ให้ฟังได้เลยครับ<button type="button" id="greetClose" aria-label="ปิดข้อความทักทาย"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+<button class="fab" type="button" data-open-chat aria-label="เปิดแชตกับเดบู"><svg width="46" height="46" viewBox="0 0 120 120" aria-hidden="true"><use href="#mascot"/></svg></button>
 </div>
 
 <div class="chat" id="chat" role="dialog" aria-label="แชตกับเดบู ผู้ช่วยด้านการออกแบบ" hidden>
 <div class="chat-head">
 <button class="ib" type="button" id="chatBack" aria-label="กลับไปที่แชต" hidden><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
-<div class="av" data-debu-live="avatar" data-debu-pose data-pose="idle"><img src="/assets/debu-avatar.jpg" alt="" width="44" height="44"></div>
+<div class="av"><svg width="34" height="34" viewBox="0 0 120 120" aria-hidden="true"><use href="#mascot"/></svg></div>
 <div class="who"><b id="chatTitle">เดบู · ผู้ช่วยด้านการออกแบบ</b><span><span class="dot"></span><span id="chatSub">ออนไลน์ ตอบทันที</span></span></div>
 <button class="ib" type="button" id="chatClose" aria-label="ปิดแชต"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
 </div>
@@ -330,32 +354,56 @@
 <button class="btn outline" type="button" id="tBack">กลับไปคุยกับเดบูต่อ</button>
 </div>
 </div>
-<div id="vJoin" style="flex:1;min-height:0;display:flex;flex-direction:column" hidden>
-<form class="book" id="joinForm" novalidate>
-<div><span class="eyebrow" style="font-size:11px">DEBUT MEMBERSHIP · สมัครฟรี</span><h3>สมัครสมาชิก DEBUT</h3><span style="font-size:13px;color:var(--ink-2)">ใช้เวลาไม่ถึง 1 นาที ทีมที่ปรึกษาจะติดต่อกลับพร้อม Shortlist ผู้เชี่ยวชาญ</span></div>
-<div class="fld"><label class="field-l" for="jName">ชื่อ-นามสกุล</label><input id="jName" type="text" autocomplete="name" required></div>
-<div class="fld"><label class="field-l" for="jPhone">เบอร์โทร หรือ LINE ID</label><input id="jPhone" type="text" autocomplete="tel" required></div>
-<div class="fld"><label class="field-l" for="jEmail">อีเมล</label><input id="jEmail" type="email" autocomplete="email" placeholder="you@example.com" required></div>
-<div class="fld"><span class="field-l">คุณคือ</span><div class="modes" id="jRole"></div></div>
-<div class="fld"><label class="field-l" for="jType">ประเภทโครงการ (ถ้ามี)</label><select id="jType"><option value="">ยังไม่แน่ใจ</option><option>บ้านพักอาศัย</option><option>รีโนเวต / ตึกแถว</option><option>คอนโด / อพาร์ตเมนต์</option><option>ออฟฟิศ</option><option>โรงแรม / รีสอร์ต</option><option>โรงพยาบาล / คลินิก</option><option>ห้างสรรพสินค้า / ร้านค้า</option><option>โรงงาน / คลังสินค้า</option><option>ภูมิทัศน์ (Landscape)</option></select></div>
-<label class="consent"><input type="checkbox" id="jConsent"> ยินยอมให้ DEBUT ติดต่อกลับและเก็บข้อมูลเพื่อให้บริการ</label>
-</form>
-<div class="book-foot"><span style="font-size:13px;color:var(--urgent-text)" id="joinErr" hidden></span><button class="btn primary" type="submit" form="joinForm">ยืนยันสมัครสมาชิก</button></div>
 </div>
-<div id="vJoined" style="flex:1;min-height:0;display:flex;flex-direction:column" hidden>
-<div class="ticket">
-<div class="ticket-card"><div class="hd"><span class="eyebrow" style="color:var(--on-night-muted)">WELCOME TO DEBUT</span><b id="mNo"></b></div>
-<div class="bd"><div class="row"><span style="color:var(--muted)">ชื่อ</span><span id="mName"></span></div><div class="row" style="border:0"><span style="color:var(--muted)">ติดต่อ</span><span id="mContact" style="overflow-wrap:anywhere;text-align:right"></span></div></div></div>
-<div style="padding:14px;background:#fff;font-size:14px">ยินดีต้อนรับสู่ DEBUT ครับ ที่ปรึกษาโครงการจะติดต่อกลับภายใน 1 วันทำการ ระหว่างนี้นัดคุยกับสถาปนิกได้เลย</div>
-<button class="btn primary" type="button" id="mBook">นัดคุยกับสถาปนิก</button>
-<button class="btn outline" type="button" id="mBack">กลับไปคุยกับเดบูต่อ</button>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="mascot"><path d="M60 14 L104 50 L104 104 Q104 110 98 110 L22 110 Q16 110 16 104 L16 50 Z" fill="#F6C945" stroke="#111" stroke-width="4" stroke-linejoin="round"/><rect x="52" y="34" width="16" height="10" rx="2" fill="#2438D6"/><circle cx="45" cy="68" r="6" fill="#111"/><circle cx="75" cy="68" r="6" fill="#111"/><circle cx="47" cy="66" r="2" fill="#fff"/><circle cx="77" cy="66" r="2" fill="#fff"/><ellipse cx="35" cy="80" rx="7" ry="4.5" fill="#F49AA0"/><ellipse cx="85" cy="80" rx="7" ry="4.5" fill="#F49AA0"/><path d="M52 82 Q60 90 68 82" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/></g></defs></svg>
+
+<div class="welcome" id="welcome" role="dialog" aria-label="ยินดีต้อนรับสู่ DEBUT" hidden>
+<button class="ib welcome-x" type="button" id="welcomeClose" aria-label="ปิด"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+<div class="welcome-toy" data-toy></div>
+<div class="welcome-b">
+<span class="eyebrow">WELCOME TO THE WORLD OF DESIGN</span>
+<p id="welcomeText" aria-live="polite"></p>
+<div class="welcome-act">
+<button class="btn primary" type="button" id="welcomeSpeak"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>ฟังน้องเดบู</button>
+<button class="btn outline" type="button" id="welcomeFilms">ดู DEBUT FILMS</button>
+</div>
+</div>
+</div>
+<button class="films-fab" type="button" id="filmsFab" aria-label="เปิด DEBUT FILMS ภาพยนตร์ AI" hidden><span class="ff-toy" data-toy></span><span class="ff-l"><b>DEBUT FILMS</b><small>ภาพยนตร์ AI</small></span></button>
+
+<div class="films" id="films" role="dialog" aria-modal="true" aria-labelledby="filmsH" hidden>
+<div class="films-box">
+<div class="films-head">
+<div><span class="eyebrow" style="color:var(--on-night-muted)">DEBUT FILMS · AI CINEMA</span><h2 id="filmsH">ภาพยนตร์ โฆษณา และพิธีกร AI</h2></div>
+<button class="ib" type="button" id="filmsClose" aria-label="ปิด"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
+<div class="films-in">
+<div class="chips" id="filmTabs" role="group" aria-label="หมวดวิดีโอ"><button class="chip" type="button" data-cat="film">ภาพยนตร์ &amp; โฆษณา AI</button><button class="chip" type="button" data-cat="mc">พิธีกร AI</button></div>
+<div class="film-loading" id="filmLoading">กำลังโหลดวิดีโอ…</div>
+<div class="film-main" id="filmMain" hidden>
+<div class="film-stage" id="filmStage"></div>
+<b class="film-title" id="filmTitle"></b>
+<div class="film-list" id="filmList"></div>
+</div>
+<div class="film-empty" id="filmEmpty" hidden><span class="fe-toy" data-toy></span><p>ยังไม่มีวิดีโอในหมวดนี้<br><small>รอบปฐมทัศน์ภาพยนตร์ AI ของ DEBUT กำลังจะมา</small></p></div>
+<form class="sub" id="subForm" novalidate>
+<div><span class="eyebrow">SUBMIT YOUR AI FILM</span><b>ส่งวิดีโอ AI ของคุณมาฉายที่ DEBUT</b><small>ใส่ลิงก์ YouTube, Vimeo หรือไฟล์ .mp4 ทีมงานจะตรวจก่อนเผยแพร่</small></div>
+<div class="sub-f">
+<label class="sr" for="subName">ชื่อ</label><input id="subName" placeholder="ชื่อ / สตูดิโอ">
+<label class="sr" for="subEmail">อีเมล</label><input id="subEmail" type="email" placeholder="อีเมล">
+<label class="sr" for="subLink">ลิงก์วิดีโอ</label><input id="subLink" type="url" placeholder="https://youtube.com/…">
+<button class="btn dark" type="submit">ส่งผลงาน</button>
+</div>
+<p class="sub-msg" id="subMsg" role="status"></p>
+</form>
 </div>
 </div>
 </div>
 
-<script src="/assets/debu-kb.js"></script>
-<script src="/assets/debu-live.js"></script>
 <script src="/assets/chat.js"></script>
 <script src="/assets/home.js"></script>
+<script src="/assets/works.js"></script>
+<script src="/assets/extras.js"></script>
 </body>
 </html>

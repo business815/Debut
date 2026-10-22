@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin Dashboard — DEBUT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.kpi{background:#fff;padding:20px;display:flex;flex-direction:column;gap:6px}
+.kpi b{font:300 40px/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.kpi.hot b{color:var(--urgent-text)}
+.evs{border-top:1px solid var(--ink)}
+.ev{display:grid;grid-template-columns:150px 140px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:start}
+.ev .d{display:flex;flex-direction:column;gap:4px;min-width:0}
+.ev .d span{font-size:14px;color:var(--ink-2);overflow-wrap:anywhere}
+.ev .d b{font-weight:500}
+@media (max-width:720px){.ev{grid-template-columns:1fr 1fr}.ev .d{grid-column:1/-1}}
+.login{max-width:420px;padding-block:96px;display:flex;flex-direction:column;gap:16px}
+.login input{min-height:52px;padding:0 14px;border:1px solid var(--ink);font-size:16px}
+.note{padding:16px 20px;background:var(--surface);border-left:3px solid var(--accent);font-size:14px}
+.note.warn{border-left-color:var(--urgent)}
+.media{display:flex;flex-direction:column;gap:16px;padding-top:32px;border-top:1px solid var(--ink)}
+.media-f{display:flex;flex-wrap:wrap;gap:8px}
+.media-f select,.media-f input{min-height:48px;padding:0 12px;border:1px solid var(--line);background:#fff;min-width:0}
+.media-f input{flex:1 1 220px}
+.media-list{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.media-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.media-row .d{flex:1 1 240px;min-width:0;display:flex;flex-direction:column}
+.media-row .d span{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<header class="top" style="background:var(--night);color:var(--on-night);border-color:var(--night)">
+<div class="wrap" style="min-height:72px">
+<a class="brand" href="/" aria-label="DEBUT หน้าแรก" style="gap:12px">
+<svg viewBox="0 0 270 240" aria-hidden="true" style="width:32px"><rect width="40" height="240" fill="#F2F2F0"/><path d="M40 0A60 60 0 0 1 40 120Z" fill="#D93A26"/><path d="M40 120A60 60 0 0 1 40 240Z" fill="#7D8CFF"/><rect x="120" width="30" height="240" fill="#F2F2F0"/><path d="M150 0A120 120 0 0 1 150 240Z" fill="#F2B705"/><circle cx="190" cy="120" r="22" fill="#111"/></svg>
+<b style="font-size:20px">DEBUT</b>
+</a>
+<div style="display:flex;align-items:center;gap:12px">
+<span class="eyebrow" style="color:var(--on-night-muted)">ADMIN DASHBOARD</span>
+<button class="btn ghost-light" type="button" id="logout" hidden style="min-height:40px;padding:0 16px">ออกจากระบบ</button>
+</div>
+</div>
+</header>
+
+<main class="wrap">
+<form class="login" id="loginForm">
+<div class="eyebrow">ADMIN · DEBUT</div>
+<h1 style="margin:0;font:300 36px/1.2 var(--f-display)">เข้าสู่ Dashboard</h1>
+<label class="field-l" for="pw">รหัสผ่านผู้ดูแล</label>
+<input id="pw" type="password" autocomplete="current-password" required>
+<span id="loginErr" style="font-size:14px;color:var(--urgent-text)" hidden></span>
+<button class="btn dark" type="submit" id="loginBtn">เข้าสู่ระบบ</button>
+</form>
+
+<div id="dash" hidden style="padding-block:40px 80px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px">
+<div><div class="eyebrow">CONTACTS · ข้อมูลจริงจากเว็บไซต์</div><h1 style="margin:8px 0 0;font:300 clamp(30px,4vw,44px)/1.2 var(--f-display)">ลูกค้าที่ติดต่อเข้ามา</h1></div>
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span style="font-size:13px;color:var(--muted)" id="updated"></span><button class="btn outline" type="button" id="bell" style="min-height:44px">🔔 เปิดแจ้งเตือนบนเครื่องนี้</button><button class="btn outline" type="button" id="refresh" style="min-height:44px">รีเฟรช</button></div>
+</div>
+<div class="note warn" id="noDb" hidden>ยังไม่ได้เชื่อมฐานข้อมูล ข้อมูลลูกค้าจึงยังไม่ถูกเก็บถาวร ไปที่ Vercel → โปรเจกต์ debut-ai-platform → แท็บ Storage → เพิ่ม Upstash Redis แล้วกด Redeploy</div>
+<div class="kpis">
+<div class="kpi"><span class="eyebrow">ทั้งหมด</span><b id="kTotal">0</b><span style="font-size:13px;color:var(--muted)">การติดต่อทุกประเภท</span></div>
+<div class="kpi"><span class="eyebrow">นัดหมาย</span><b id="kBooking">0</b><span style="font-size:13px;color:var(--muted)">จองคุยกับสถาปนิก</span></div>
+<div class="kpi"><span class="eyebrow">ขอให้ติดต่อกลับ</span><b id="kLead">0</b><span style="font-size:13px;color:var(--muted)">คำถามซับซ้อน ทิ้งเบอร์ไว้</span></div>
+<div class="kpi hot"><span class="eyebrow" style="color:var(--urgent-text)">งานด่วน</span><b id="kUrgent">0</b><span style="font-size:13px;color:var(--muted)">Fast-Track</span></div>
+<div class="kpi"><span class="eyebrow">ทดลองใช้ 30 วัน</span><b id="kTrial">0</b><span style="font-size:13px;color:var(--muted)">สมัคร Free Trial</span></div>
+<div class="kpi"><span class="eyebrow">วันนี้</span><b id="kToday">0</b><span style="font-size:13px;color:var(--muted)">ตามเวลาประเทศไทย</span></div>
+</div>
+<div class="filters chips" role="group" aria-label="กรองตามประเภท" id="filters"></div>
+<div class="evs" id="list"></div>
+<div id="empty" hidden style="padding:48px 0;color:var(--ink-2)">ยังไม่มีลูกค้าติดต่อเข้ามา เมื่อมีคนจองนัด ทิ้งเบอร์ หรือกดติดต่อด่วนบนเว็บ ข้อมูลจะแสดงที่นี่</div>
+<div class="note" id="stripeNote" hidden>ยังไม่ได้เชื่อม Stripe ผู้สมัครทดลองใช้จะถูกบันทึกไว้ที่นี่ แต่ยังไม่ถูกพาไปหน้าใส่บัตร ให้เพิ่ม STRIPE_SECRET_KEY และ STRIPE_PRICE_ID ใน Vercel แล้ว Redeploy</div>
+
+<section class="media" id="media">
+<div><div class="eyebrow">DEBUT FILMS · จัดการวิดีโอ</div><h2 style="margin:8px 0 0;font:300 30px/1.2 var(--f-display)">วิดีโอ AI บนหน้าเว็บ</h2><p style="margin:6px 0 0;font-size:14px;color:var(--ink-2)">วิดีโอที่เพิ่มที่นี่จะขึ้นในป๊อปอัป DEBUT FILMS ทันที ใส่ลิงก์ YouTube, Vimeo หรือไฟล์ .mp4 / .webm (แนะนำอัปโหลดขึ้น YouTube แบบ Unlisted แล้วนำลิงก์มาใส่)</p></div>
+<form class="media-f" id="mediaForm">
+<label class="sr" for="mCat">หมวด</label><select id="mCat"><option value="film">ภาพยนตร์ &amp; โฆษณา AI</option><option value="mc">พิธีกร AI</option></select>
+<label class="sr" for="mTitle">ชื่อวิดีโอ</label><input id="mTitle" placeholder="ชื่อวิดีโอ" maxlength="120" required>
+<label class="sr" for="mUrl">ลิงก์</label><input id="mUrl" type="url" placeholder="https://www.youtube.com/watch?v=…" required>
+<button class="btn dark" type="submit" id="mAdd">เพิ่มวิดีโอ</button>
+</form>
+<span id="mMsg" style="font-size:14px" role="status"></span>
+<div class="media-list" id="mediaList"></div>
+</section>
+</div>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var $ = function (s) { return document.querySelector(s); };
+  var PW_KEY = "debut-admin-pw";
+  var state = { pw: "", data: null, filter: "all" };
+  var TYPE = { booking: ["นัดหมาย", "#2438D6"], lead: ["ขอติดต่อกลับ", "#111111"], urgent: ["งานด่วน", "#C0392B"], trial: ["ทดลองใช้ 30 วัน", "#2E7D50"], video: ["ส่งวิดีโอ AI", "#7A4FD6"] };
+  function getPw() { try { return sessionStorage.getItem(PW_KEY) || ""; } catch (e) { return ""; } }
+  function setPw(v) { try { v ? sessionStorage.setItem(PW_KEY, v) : sessionStorage.removeItem(PW_KEY); } catch (e) {} }
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function bkkDate(iso) { return new Date(iso).toLocaleDateString("en-CA", { timeZone: "Asia/Bangkok" }); }
+  function bkkTime(iso) { return new Date(iso).toLocaleString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); }
+
+  function load(pw) {
+    return fetch("/api/admin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password: pw }) })
+      .then(function (r) { return r.json().then(function (j) { return { status: r.status, body: j }; }); });
+  }
+
+  function showLogin(msg) {
+    $("#dash").hidden = true; $("#loginForm").hidden = false; $("#logout").hidden = true;
+    var e = $("#loginErr"); if (msg) { e.textContent = msg; e.hidden = false; } else e.hidden = true;
+  }
+
+  function login(pw, silent) {
+    $("#loginBtn").disabled = true;
+    return load(pw).then(function (res) {
+      $("#loginBtn").disabled = false;
+      if (res.status === 401) { setPw(""); if (!silent) showLogin("รหัสผ่านไม่ถูกต้อง ลองอีกครั้ง"); else showLogin(); return; }
+      if (res.status === 503) { showLogin("ยังไม่ได้ตั้งรหัสผ่านผู้ดูแล ให้เพิ่ม ADMIN_PASSWORD ใน Vercel → Settings → Environment Variables แล้ว Redeploy"); return; }
+      if (res.status !== 200) { showLogin("อ่านข้อมูลไม่สำเร็จ ลองรีเฟรชอีกครั้งในอีกสักครู่"); return; }
+      state.pw = pw; setPw(pw); state.data = res.body;
+      var first = $("#dash").hidden;
+      $("#loginForm").hidden = true; $("#dash").hidden = false; $("#logout").hidden = false;
+      render();
+      checkNew(res.body.events || []);
+      if (first) media({ action: "list" });
+    }).catch(function () { $("#loginBtn").disabled = false; showLogin("เชื่อมต่อไม่ได้ ตรวจอินเทอร์เน็ตแล้วลองใหม่"); });
+  }
+
+  function detail(ev) {
+    var d = ev.data || {}, box = el("div", "d");
+    if (ev.type === "booking") {
+      box.appendChild(el("b", "", (d.no || "") + " · " + (d.when || "")));
+      box.appendChild(el("span", "", (d.mode || "") + " · " + (d.email || "")));
+    } else if (ev.type === "lead") {
+      var ch = [d.phone && "โทร " + d.phone, d.line && "LINE " + d.line, d.whatsapp && "WhatsApp " + d.whatsapp].filter(Boolean).join(" · ");
+      box.appendChild(el("b", "", ch || "ไม่ระบุช่องทาง"));
+    } else if (ev.type === "trial") {
+      box.appendChild(el("b", "", (d.name || "") + " · " + (d.email || "")));
+      box.appendChild(el("span", "", [d.phone && "โทร " + d.phone, d.project, d.checkout === "stripe" ? "ไปหน้าใส่บัตร Stripe แล้ว" : "รอส่งลิงก์ยืนยันบัตร"].filter(Boolean).join(" · ")));
+    } else if (ev.type === "video") {
+      box.appendChild(el("b", "", (d.name || "") + " · " + (d.email || "")));
+      box.appendChild(el("span", "", (d.category || "") + " · " + (d.link || "")));
+    } else {
+      box.appendChild(el("b", "", d.ticket || "งานด่วนจากแชต"));
+      if (d.message) box.appendChild(el("span", "", d.message));
+    }
+    var topic = d.topic || "";
+    if (topic) box.appendChild(el("span", "", "เรื่อง: " + topic));
+    return box;
+  }
+
+  function render() {
+    var data = state.data || { counts: {}, events: [] }, c = data.counts || {}, evs = data.events || [];
+    $("#noDb").hidden = data.databaseConnected !== false;
+    $("#kTotal").textContent = c.total || 0;
+    $("#kBooking").textContent = c.booking || 0;
+    $("#kLead").textContent = c.lead || 0;
+    $("#kUrgent").textContent = c.urgent || 0;
+    $("#kTrial").textContent = c.trial || 0;
+    $("#stripeNote").hidden = data.stripe !== false;
+    var today = bkkDate(new Date().toISOString());
+    $("#kToday").textContent = evs.filter(function (e) { return bkkDate(e.receivedAt) === today; }).length;
+    $("#updated").textContent = "อัปเดต " + new Date().toLocaleTimeString("th-TH", { timeZone: "Asia/Bangkok", hour: "2-digit", minute: "2-digit" });
+
+    var f = $("#filters"); f.innerHTML = "";
+    [["all", "ทั้งหมด"], ["booking", "นัดหมาย"], ["lead", "ขอติดต่อกลับ"], ["urgent", "งานด่วน"], ["trial", "ทดลองใช้"], ["video", "ส่งวิดีโอ"]].forEach(function (x) {
+      var b = el("button", "chip", x[1]); b.type = "button"; b.setAttribute("aria-pressed", String(state.filter === x[0]));
+      b.addEventListener("click", function () { state.filter = x[0]; render(); }); f.appendChild(b);
+    });
+
+    var list = $("#list"); list.innerHTML = "";
+    var shown = evs.filter(function (e) { return state.filter === "all" || e.type === state.filter; });
+    $("#empty").hidden = shown.length > 0;
+    shown.forEach(function (ev) {
+      var row = el("div", "ev"), t = TYPE[ev.type] || [ev.type, "#6B6B6B"];
+      row.appendChild(el("span", "mono num", bkkTime(ev.receivedAt))).style.cssText = "font-size:12px;letter-spacing:.06em;color:var(--muted)";
+      var tag = el("span", "m-tag", t[0]); tag.style.background = t[1]; row.appendChild(tag);
+      row.appendChild(detail(ev));
+      list.appendChild(row);
+    });
+  }
+
+  /* new-contact alerts while this page is open */
+  var LAST_KEY = "debut-admin-last", baseTitle = document.title, unseen = 0;
+  function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function beep() {
+    try {
+      var A = window.AudioContext || window.webkitAudioContext; if (!A) return;
+      var ctx = new A(), t = ctx.currentTime;
+      [880, 1320].forEach(function (f, i) {
+        var o = ctx.createOscillator(), g = ctx.createGain();
+        o.frequency.value = f; o.type = "sine"; o.connect(g); g.connect(ctx.destination);
+        g.gain.setValueAtTime(0.0001, t + i * 0.18); g.gain.exponentialRampToValueAtTime(0.25, t + i * 0.18 + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + i * 0.18 + 0.3);
+        o.start(t + i * 0.18); o.stop(t + i * 0.18 + 0.32);
+      });
+    } catch (e) {}
+  }
+  function bellLabel() {
+    var b = $("#bell"); if (!("Notification" in window)) { b.hidden = true; return; }
+    b.textContent = Notification.permission === "granted" ? "🔔 แจ้งเตือนเปิดอยู่" : Notification.permission === "denied" ? "🔕 เบราว์เซอร์ปิดแจ้งเตือนไว้" : "🔔 เปิดแจ้งเตือนบนเครื่องนี้";
+  }
+  function checkNew(evs) {
+    var last = lsGet(LAST_KEY), top = evs.length ? evs[0].id : "";
+    if (last === null) { lsSet(LAST_KEY, top); return; }
+    if (last === top) return;
+    var fresh = [];
+    for (var i = 0; i < evs.length && evs[i].id !== last; i++) fresh.push(evs[i]);
+    lsSet(LAST_KEY, top);
+    if (!fresh.length) return;
+    unseen += fresh.length;
+    document.title = "(" + unseen + ") ลูกค้าใหม่ — " + baseTitle;
+    beep();
+    if ("Notification" in window && Notification.permission === "granted") {
+      var e0 = fresh[0], d = e0.data || {}, t = TYPE[e0.type] || [e0.type];
+      try { new Notification("DEBUT · " + t[0] + (fresh.length > 1 ? " (+" + (fresh.length - 1) + ")" : ""), { body: [d.name, d.email, d.phone, d.no, d.topic].filter(Boolean).join(" · ") || "มีลูกค้าติดต่อเข้ามา", tag: "debut-" + e0.id }); } catch (e) {}
+    }
+  }
+  window.addEventListener("focus", function () { unseen = 0; document.title = baseTitle; });
+  $("#bell").addEventListener("click", function () {
+    if (!("Notification" in window)) return;
+    Notification.requestPermission().then(function () { bellLabel(); if (Notification.permission === "granted") { beep(); try { new Notification("DEBUT", { body: "เปิดแจ้งเตือนแล้ว ลูกค้าใหม่จะเด้งขึ้นที่นี่ขณะเปิดหน้า Admin ไว้" }); } catch (e) {} } });
+  });
+  bellLabel();
+
+  var CAT = { film: "ภาพยนตร์ & โฆษณา AI", mc: "พิธีกร AI" };
+  var MERR = { unsupported_url: "ลิงก์นี้ใช้ไม่ได้ ใช้ลิงก์ YouTube, Vimeo หรือไฟล์ .mp4 / .webm ที่ขึ้นต้นด้วย https://", bad_input: "กรอกชื่อวิดีโอให้ครบ", database_not_connected: "ต้องเชื่อมฐานข้อมูล Upstash Redis ก่อนจึงจะเพิ่มวิดีโอได้" };
+  function mediaMsg(t, ok) { var m = $("#mMsg"); m.textContent = t || ""; m.style.color = ok ? "var(--ok)" : "var(--urgent-text)"; }
+  function renderMedia(items) {
+    var box = $("#mediaList"); box.innerHTML = "";
+    if (!items.length) { box.appendChild(el("p", "", "ยังไม่มีวิดีโอ")).style.cssText = "color:var(--muted);font-size:14px"; return; }
+    items.forEach(function (it) {
+      var row = el("div", "media-row"), d = el("div", "d");
+      d.appendChild(el("b", "", it.title)); d.appendChild(el("span", "", CAT[it.cat] + " · " + it.url));
+      row.appendChild(d);
+      var del = el("button", "btn outline", "ลบ"); del.type = "button"; del.style.minHeight = "40px";
+      del.addEventListener("click", function () { if (confirm("ลบวิดีโอ \"" + it.title + "\" ?")) media({ action: "remove", id: it.id }); });
+      row.appendChild(del); box.appendChild(row);
+    });
+  }
+  function media(payload) {
+    payload.password = state.pw;
+    return fetch("/api/media", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
+      .then(function (r) { return r.json().then(function (j) { return { status: r.status, body: j }; }); })
+      .then(function (res) {
+        if (res.status === 200) { renderMedia(res.body.items || []); if (payload.action === "add") { mediaMsg("เพิ่มวิดีโอแล้ว ขึ้นบนเว็บภายใน 1 นาที", true); $("#mediaForm").reset(); } else mediaMsg(""); return; }
+        if (res.status === 401) { showLogin("กรุณาเข้าสู่ระบบอีกครั้ง"); return; }
+        mediaMsg(MERR[res.body && res.body.error] || "บันทึกไม่สำเร็จ ลองใหม่อีกครั้ง");
+        if (res.body && res.body.error === "database_not_connected") renderMedia([]);
+      }).catch(function () { mediaMsg("เชื่อมต่อไม่ได้ ลองใหม่อีกครั้ง"); });
+  }
+  $("#mediaForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    media({ action: "add", item: { cat: $("#mCat").value, title: $("#mTitle").value.trim(), url: $("#mUrl").value.trim() } });
+  });
+
+  $("#loginForm").addEventListener("submit", function (e) { e.preventDefault(); var v = $("#pw").value; if (v) login(v, false); });
+  $("#refresh").addEventListener("click", function () { if (state.pw) login(state.pw, true); });
+  $("#logout").addEventListener("click", function () { setPw(""); state.pw = ""; state.data = null; $("#pw").value = ""; showLogin(); });
+  setInterval(function () { if (state.pw) login(state.pw, true); }, 30000);
+
+  var saved = getPw();
+  if (saved) login(saved, true); else showLogin();
+})();
+</script>
+</body>
+</html>
