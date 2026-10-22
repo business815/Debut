@@ -14,6 +14,7 @@
   function scroll() { log.scrollTop = log.scrollHeight; }
 
   function notify(type, data) {
+    if (window.debutTrack) window.debutTrack(type);
     try { fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: type, data: data, page: location.pathname, at: new Date().toISOString() }) }).catch(function () {}); } catch (e) {}
   }
   window.debutNotify = notify;
@@ -120,7 +121,7 @@
     text = String(text || "").trim();
     if (!text || busy) return;
     busy = true; lastTopic = text;
-    if (!started) started = Date.now();
+    if (!started) { started = Date.now(); if (window.debutTrack) window.debutTrack("chat"); }
     addMe(text);
     pose("think");
     var intent = detect(text);
