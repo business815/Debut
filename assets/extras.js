@@ -158,6 +158,7 @@
       if (!d.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) { msg.hidden = false; msg.className = "trial-msg err"; msg.textContent = "กรุณากรอกชื่อและอีเมลให้ถูกต้อง"; return; }
       if (!$("#trAgree").checked) { msg.hidden = false; msg.className = "trial-msg err"; msg.textContent = "กรุณายอมรับเงื่อนไขการทดลองใช้ก่อน"; return; }
       btn.disabled = true; btn.textContent = "กำลังเตรียมหน้าชำระเงินที่ปลอดภัย…";
+      if (window.debutTrack) window.debutTrack("trial");
       fetch("/api/trial", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(d) })
         .then(function (r) { return r.json(); })
         .then(function (j) {
@@ -173,7 +174,7 @@
     var q = new URLSearchParams(location.search).get("trial");
     if (q) {
       var m = $("#trialMsg"); m.hidden = false;
-      if (q === "success") { m.className = "trial-msg ok"; m.textContent = "ยืนยันบัตรเรียบร้อย สิทธิ์ทดลองใช้สถาปนิกฟรี 30 วันเริ่มแล้ว ทีมจะติดต่อนัดคุยครั้งแรกภายใน 1 วันทำการ"; }
+      if (q === "success") { if (window.debutTrack) window.debutTrack("trial_success"); m.className = "trial-msg ok"; m.textContent = "ยืนยันบัตรเรียบร้อย สิทธิ์ทดลองใช้สถาปนิกฟรี 30 วันเริ่มแล้ว ทีมจะติดต่อนัดคุยครั้งแรกภายใน 1 วันทำการ"; }
       else { m.className = "trial-msg err"; m.textContent = "ยังไม่ได้ยืนยันบัตร คุณสามารถลองอีกครั้งได้ทุกเมื่อ"; }
       setTimeout(function () { var s = $("#trial"); if (s) s.scrollIntoView(); }, 300);
     }
