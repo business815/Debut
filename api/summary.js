@@ -2,6 +2,7 @@
 // Read-only summary of recent contacts for automated check-ins (Claude scheduled task).
 const crypto = require("crypto");
 const { config, pipeline } = require("./_redis");
+const { visitorStats } = require("./_visitors");
 
 function same(a, b) {
   const ha = crypto.createHash("sha256").update(String(a)).digest();
@@ -25,7 +26,8 @@ module.exports = async function handler(req, res) {
     const recent = events.filter(e => Date.parse(e.receivedAt) >= since);
     const c = {};
     if (Array.isArray(counts)) for (let i = 0; i < counts.length; i += 2) c[counts[i]] = Number(counts[i + 1]) || 0;
-    return res.status(200).json({ databaseConnected: true, windowMinutes: minutes, newCount: recent.length, counts: c, recent });
+    const visitors = await visitorStats();
+    return res.status(200).json({ databaseConnected: true, windowMinutes: minutes, newCount: recent.length, counts: c, visitors, recent });
   } catch (e) {
     console.error("summary_failed", e && e.message);
     return res.status(502).json({ error: "database_error" });

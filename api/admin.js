@@ -1,6 +1,7 @@
 // DEBUT — POST /api/admin  { password }
 const { config, pipeline } = require("./_redis");
 const { checkAdmin, parseBody } = require("./_auth");
+const { visitorStats } = require("./_visitors");
 
 module.exports = async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
@@ -22,7 +23,8 @@ module.exports = async function handler(req, res) {
     const events = (rows || []).map(s => { try { return JSON.parse(s); } catch (e) { return null; } }).filter(Boolean);
     const c = {};
     if (Array.isArray(counts)) for (let i = 0; i < counts.length; i += 2) c[counts[i]] = Number(counts[i + 1]) || 0;
-    return res.status(200).json({ databaseConnected: true, stripe, counts: c, events });
+    const visitors = await visitorStats();
+    return res.status(200).json({ databaseConnected: true, stripe, counts: c, events, visitors });
   } catch (e) {
     console.error("admin_read_failed", e && e.message);
     return res.status(502).json({ error: "database_error" });
