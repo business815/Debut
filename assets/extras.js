@@ -1,32 +1,13 @@
-/* DEBUT — art-toy mascot welcome, DEBUT FILMS pop-up, free-trial form */
+/* DEBUT — น้องเดบู mascot welcome, DEBUT FILMS pop-up, free-trial form */
 (function () {
   "use strict";
   var $ = function (s) { return document.querySelector(s); };
   function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
   function ss(k, v) { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } }
 
-  var TOY = '<svg class="toy" viewBox="0 0 200 240" aria-hidden="true">' +
-    '<defs><radialGradient id="tgHead" cx="35%" cy="28%" r="78%"><stop offset="0" stop-color="#FFEFA8"/><stop offset=".5" stop-color="#F6C945"/><stop offset="1" stop-color="#D99E1C"/></radialGradient>' +
-    '<radialGradient id="tgBody" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#6576FF"/><stop offset="1" stop-color="#1B2BA8"/></radialGradient>' +
-    '<radialGradient id="tgEye" cx="40%" cy="32%" r="72%"><stop offset="0" stop-color="#4A5AA8"/><stop offset="1" stop-color="#0B0F2A"/></radialGradient></defs>' +
-    '<ellipse cx="100" cy="231" rx="46" ry="7" fill="#000" opacity=".14"/>' +
-    '<g class="toy-all">' +
-    '<rect x="76" y="194" width="20" height="30" rx="10" fill="#F4F4F2" stroke="#111" stroke-width="3"/><rect x="104" y="194" width="20" height="30" rx="10" fill="#F4F4F2" stroke="#111" stroke-width="3"/>' +
-    '<rect x="46" y="154" width="20" height="40" rx="10" fill="url(#tgBody)" stroke="#111" stroke-width="3" transform="rotate(16 56 158)"/>' +
-    '<rect x="62" y="148" width="76" height="62" rx="28" fill="url(#tgBody)" stroke="#111" stroke-width="3"/>' +
-    '<circle cx="100" cy="182" r="9" fill="#F2B705" stroke="#111" stroke-width="2"/><path d="M100 173a9 9 0 0 1 0 18z" fill="#D93A26"/>' +
-    '<g class="toy-arm"><rect x="134" y="128" width="20" height="44" rx="10" fill="url(#tgBody)" stroke="#111" stroke-width="3"/><circle cx="144" cy="126" r="10" fill="#FFE9D6" stroke="#111" stroke-width="3"/></g>' +
-    '<g class="toy-head">' +
-    '<rect x="134" y="24" width="18" height="34" rx="4" fill="#2438D6" stroke="#111" stroke-width="3"/>' +
-    '<path d="M100 14Q108 14 114 19L178 72Q186 79 186 90V138Q186 162 162 162H38Q14 162 14 138V90Q14 79 22 72L86 19Q92 14 100 14Z" fill="url(#tgHead)" stroke="#111" stroke-width="3.5" stroke-linejoin="round"/>' +
-    '<path d="M62 60a14 14 0 0 1 28 0z" fill="#D93A26" stroke="#111" stroke-width="3"/>' +
-    '<ellipse cx="58" cy="84" rx="22" ry="9" fill="#fff" opacity=".5" transform="rotate(-32 58 84)"/>' +
-    '<g class="toy-eyes"><ellipse cx="70" cy="110" rx="17" ry="20" fill="url(#tgEye)" stroke="#111" stroke-width="2"/><ellipse cx="130" cy="110" rx="17" ry="20" fill="url(#tgEye)" stroke="#111" stroke-width="2"/>' +
-    '<circle cx="64" cy="102" r="6.5" fill="#fff"/><circle cx="124" cy="102" r="6.5" fill="#fff"/><circle cx="76" cy="119" r="3" fill="#fff"/><circle cx="136" cy="119" r="3" fill="#fff"/></g>' +
-    '<ellipse cx="46" cy="134" rx="11" ry="6" fill="#F49AA0" opacity=".9"/><ellipse cx="154" cy="134" rx="11" ry="6" fill="#F49AA0" opacity=".9"/>' +
-    '<path class="toy-mouth" d="M91 136Q100 147 109 136Q100 140 91 136Z" fill="#9E3434" stroke="#111" stroke-width="2" stroke-linejoin="round"/>' +
-    "</g></g></svg>";
-  document.querySelectorAll("[data-toy]").forEach(function (n, i) { n.innerHTML = TOY.replace(/tg(Head|Body|Eye)/g, "tg$1" + i); });
+  // น้องเดบู (art toy) — debu-live.js adds blinking, breathing and tilt to every [data-debu-live].
+  var TOY = '<span class="toy" data-debu-live="full"><img src="/assets/debu.jpg" alt="" width="410" height="490"></span>';
+  document.querySelectorAll("[data-toy]").forEach(function (n) { n.innerHTML = TOY; });
 
   var WELCOME = "สวัสดีครับ! ผมน้องเดบู ยินดีต้อนรับสู่โลกแห่งการออกแบบของ DEBUT ที่ไอเดียของคุณจะกลายเป็นอาคารจริง ด้วย AI และสถาปนิกตัวจริงครับ";
   var toys = function () { return document.querySelectorAll(".toy"); };

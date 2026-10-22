@@ -1,0 +1,26 @@
+/* DEBUT — น้องเดบู: live mascot (debu-live.js), chat poses, Debu answer chips */
+.debu-live { position: relative; display: block; overflow: hidden; transform: perspective(700px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .3s ease-out; }
+.debu-body { position: absolute; inset: 0; display: block; transform-origin: 50% 85%; animation: breathe 4.2s ease-in-out infinite; }
+.debu-body > img { width: 100%; height: 100%; object-fit: cover; transform: translate(var(--px, 0px), var(--py, 0px)) scale(1.06); transition: transform .3s ease-out; }
+.lids { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; transform: translate(var(--px, 0px), var(--py, 0px)) scale(1.06); transition: transform .3s ease-out; }
+.lid { opacity: 0; transition: opacity .05s; }
+.blink .lid { opacity: 1; }
+@keyframes breathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.012, 1.028); } }
+.fab-in { width: 100%; height: 100%; border-radius: 50%; }
+.debu-hero.debu-live { transition: transform .4s ease-out, box-shadow .4s; }
+.av.debu-live { border-radius: 50%; }
+.av .debu-body > img { transition: opacity .16s, transform .3s ease-out; }
+.av.swap .debu-body > img { opacity: 0; }
+.av:not([data-pose="idle"]) .lids { display: none; }
+.av:not([data-pose="idle"]) .debu-body > img { object-position: 50% 22%; transform: scale(1.5) translateY(12%); }
+.av:not([data-pose="idle"]) .debu-body { animation: hop .45s ease-out, breathe 4.2s ease-in-out .45s infinite; }
+@keyframes hop { 40% { transform: translateY(-8%) scale(1.04); } }
+.toy.debu-live{border-radius:20px;background:#efe9e1}
+.ff-toy .toy.debu-live{border-radius:12px}
+.toy.talk .debu-body{animation:debuTalk .45s ease-in-out infinite alternate}
+@keyframes debuTalk{from{transform:rotate(-1.6deg) scale(1.01)}to{transform:rotate(1.6deg) scale(1.02)}}
+.fab .fab-in{display:block}
+.quick button.faq-q{border-color:var(--accent);color:var(--accent)}
+.trial-nudge{display:flex;flex-direction:column;gap:8px;margin-top:10px;padding:12px;border:1px solid var(--accent);background:#fff}
+.trial-nudge small{font-size:12px;color:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){.debu-body,.toy.talk .debu-body{animation:none}.debu-live{transform:none}}

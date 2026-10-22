@@ -5,6 +5,8 @@
   if (!chat) return;
   var log = $("#log"), msg = $("#msg"), quick = $("#quick");
   var history = [], busy = false, lastTopic = "";
+  var started = 0, answers = 0, nudged = false;
+  var NUDGE_ANSWERS = 3, NUDGE_MS = 3 * 60 * 1000; // invite to the free trial within ~5 minutes of chatting
 
   function store(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
   function load(key, d) { try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : d; } catch (e) { return d; } }
@@ -21,12 +23,34 @@
     complex: /โหลด|โครงสร้าง|คาน|เสาเข็ม|ฐานราก|ผังเมือง|กฎหมาย|ระยะร่น|วิศวกร|ขออนุญาต|EIA|structural|zoning/i,
     buying: /ราคา|งบ|เท่าไหร่|เท่าไร|ค่าใช้จ่าย|ค่าออกแบบ|เริ่มงาน|เริ่มได้|ใบเสนอราคา|จ้าง|quotation|budget|price|cost/i
   };
+  // น้องเดบู knowledge (assets/debu-kb.js): offline answers when /api/chat is unavailable, and follow-up question chips.
+  var KB = window.DEBU_KB || { faq: [], entries: [] };
+  var byId = {}, byQ = {};
+  KB.entries.forEach(function (e) { byId[e.id] = e; byQ[e.q] = e; });
+  function kbMatch(t) {
+    if (byQ[t]) return byQ[t];
+    var low = String(t).toLowerCase(), top = null, topScore = 0;
+    KB.entries.forEach(function (e) {
+      var sc = 0;
+      (e.keys || []).forEach(function (k) { if (low.indexOf(k) !== -1) sc += k.length; });
+      if (sc > topScore) { top = e; topScore = sc; }
+    });
+    return top;
+  }
+  function plain(html) { return String(html).replace(/<br\s*\/?>/gi, "\n").replace(/<[^>]+>/g, "").replace(/&amp;/g, "&"); }
+  function kbAnswer(e) { return e.a.map(plain).join("\n\n"); }
+
   function detect(t) { if (RX.urgent.test(t)) return "urgent"; if (RX.complex.test(t)) return "complex"; if (RX.buying.test(t)) return "buying"; return ""; }
 
   function canned(t, intent) {
     if (intent === "urgent") return "รับทราบครับ เรื่องนี้ส่งถึงทีมบริหารโครงการแล้ว ระหว่างนี้เล่าขอบเขตงาน พื้นที่ และวันที่ต้องการเริ่มงานเพิ่มเติมได้เลยครับ";
     if (intent === "complex") return "รายละเอียดในส่วนนี้มีความซับซ้อนและต้องใช้ความเชี่ยวชาญเฉพาะด้าน เพื่อให้ได้ข้อมูลที่แม่นยำที่สุด รบกวนทิ้งเบอร์ติดต่อ, LINE ID หรือ WhatsApp ไว้ให้ทีมสถาปนิกอาวุโสติดต่อกลับครับ";
+    if (byQ[t]) return kbAnswer(byQ[t]);
+    var m = kbMatch(t);
+    if (m && /^member/.test(m.id)) return kbAnswer(m); // "ค่าสมาชิกเท่าไหร่" is about membership, not construction prices
     if (intent === "buying") return "ประเมินเบื้องต้นครับ\n- สเปกมาตรฐาน ราว 12,000–18,000 บาท/ตร.ม.\n- สเปกดี ราว 18,000–25,000 บาท/ตร.ม.\n- สเปกพรีเมียม ราว 25,000–35,000 บาท/ตร.ม.\n- ค่าออกแบบโดยทั่วไปราว 5–8% ของค่าก่อสร้าง\nตัวเลขจริงขึ้นกับแบบและสเปก แนะนำคุยกับสถาปนิกเพื่อประเมินละเอียดครับ";
+    var e = kbMatch(t);
+    if (e) return kbAnswer(e);
     if (/japandi|มินิมอล|minimal|tropical|ทรอปิคอล|luxury|ลักชัวรี/i.test(t)) return "สไตล์นี้เน้นวัสดุธรรมชาติ โทนสีน้อย และแสงธรรมชาติครับ ลองใช้เครื่องมือ AI Concept Generator บนหน้าแรกเพื่อดูโทนสีและวัสดุแนะนำ แล้วส่งให้สถาปนิกต่อได้เลย";
     return "เข้าใจครับ เล่าเพิ่มอีกนิดได้ไหมครับว่าเป็นอาคารประเภทไหน พื้นที่ประมาณกี่ ตร.ม. และอยู่จังหวัดอะไร ผมจะช่วยประเมินงบและแนะนำสถาปนิกที่ตรงงานให้";
   }
@@ -39,6 +63,7 @@
     wrap.appendChild(el("div", "tx", text || ""));
     if (opts.cta) wrap.appendChild(ctaBox());
     if (opts.lead) wrap.appendChild(leadForm());
+    if (opts.trial) wrap.appendChild(trialBox());
     log.appendChild(wrap); scroll();
   }
   function typing() { var d = el("div", "typing"); d.setAttribute("aria-label", "เดบูกำลังพิมพ์"); d.innerHTML = "<i></i><i></i><i></i>"; log.appendChild(d); scroll(); return d; }
@@ -48,6 +73,28 @@
     var b = el("button", "btn primary", "ต้องการพูดคุยกับผู้เชี่ยวชาญ/สถาปนิกโดยตรง");
     b.type = "button"; b.addEventListener("click", function () { show("book"); });
     box.appendChild(b); return box;
+  }
+  function trialBox() {
+    nudged = true;
+    var box = el("div", "trial-nudge");
+    box.appendChild(el("small", "", "ทดลองใช้บริการสถาปนิกฟรี 30 วัน ไม่ตัดเงินระหว่างทดลอง ยกเลิกได้ทุกเมื่อ"));
+    var b = el("button", "btn primary", "สมัครทดลองใช้ฟรี 30 วัน");
+    b.type = "button";
+    b.addEventListener("click", function () {
+      closeChat();
+      var t = $("#trial"); if (t) t.scrollIntoView({ behavior: "smooth" });
+      setTimeout(function () { var n = $("#trName"); if (n) n.focus({ preventScroll: true }); }, 600);
+    });
+    box.appendChild(b); return box;
+  }
+  function pose(name, hold) { document.dispatchEvent(new CustomEvent("debu:pose", { detail: { pose: name, hold: hold } })); }
+  function suggest(list) {
+    quick.innerHTML = "";
+    list.forEach(function (q) { var b = el("button", "faq-q", q); b.type = "button"; b.addEventListener("click", function () { ask(q); }); quick.appendChild(b); });
+  }
+  function followUps(e) {
+    var ids = e && e.next && e.next.length ? e.next : KB.faq;
+    suggest(ids.map(function (id) { return byId[id] && byId[id].q; }).filter(Boolean));
   }
   var leadSeq = 0;
   function leadForm() {
@@ -73,7 +120,9 @@
     text = String(text || "").trim();
     if (!text || busy) return;
     busy = true; lastTopic = text;
+    if (!started) started = Date.now();
     addMe(text);
+    pose("think");
     var intent = detect(text);
     if (intent === "urgent") notify("urgent", { message: text });
     history.push({ role: "user", content: text });
@@ -84,10 +133,16 @@
     if (intent === "buying") opts = { tag: "BUYING INTENT", tagBg: "#2438D6", cta: true };
     if (intent === "complex") opts = { tag: "ESCALATION · ต้องใช้ผู้เชี่ยวชาญ", tagBg: "#111111", lead: true };
     if (intent === "urgent") opts = { tag: "URGENT · FAST-TRACK", tagBg: "#C0392B" };
+    var entry = intent === "complex" || intent === "urgent" ? null : kbMatch(text);
+    if (entry && entry.cta === "book" && !opts.lead) opts.cta = true;
     function finish(answer) {
       tip.remove();
       if (intent === "urgent") answer = "บริษัทได้รับความต้องการเร่งด่วนของท่านแล้ว ทีมบริหารโครงการจะทำการติดต่อกลับภายใน 30 นาที\n\n" + answer;
+      answers++;
+      if (!nudged && !opts.lead && ((entry && entry.cta === "join") || answers >= NUDGE_ANSWERS || Date.now() - started >= NUDGE_MS)) opts.trial = true;
       addBot(answer, opts);
+      pose(intent === "complex" ? "site" : intent === "buying" ? "model" : "present", 2600);
+      followUps(entry);
       history.push({ role: "assistant", content: answer });
       busy = false; $("#chatSub").textContent = "ออนไลน์ ตอบทันที";
     }
@@ -172,8 +227,8 @@
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !chat.hidden) closeChat(); });
   document.addEventListener("click", function (e) { var t = e.target.closest("[data-open-chat]"); if (!t) return; e.preventDefault(); openChat(t.getAttribute("data-chat-msg") || ""); });
 
-  function greet() { addBot('สวัสดีครับ ผม "เดบู" ผู้ช่วยด้านการออกแบบของ DEBUT\nเล่าโปรเจกต์ ถามเรื่องงบ วัสดุ หรือหาสถาปนิกที่ใช่ได้เลยครับ'); }
-  ["อยากทราบราคา บ้าน 2 ชั้น 250 ตร.ม.", "คำนวณโหลดคานยื่น 6 เมตรได้ไหม", "ด่วน! ต้องเริ่มงานเดือนหน้า", "ไอเดียห้องนั่งเล่นสไตล์ Japandi"].forEach(function (q) { var b = el("button", "", q); b.type = "button"; b.addEventListener("click", function () { ask(q); }); quick.appendChild(b); });
+  function greet() { addBot('สวัสดีครับ ผม "เดบู" ผู้ช่วยด้านการออกแบบของ DEBUT\nเล่าโปรเจกต์ ถามเรื่องงบ วัสดุ หรือหาสถาปนิกที่ใช่ได้เลยครับ\nหรือแตะคำถามด้านล่างก็ได้'); }
+  followUps(null);
   $("#chatForm").addEventListener("submit", function (e) { e.preventDefault(); var v = msg.value; msg.value = ""; ask(v); });
 
   $("#greetClose").addEventListener("click", function () { $("#greet").hidden = true; });
