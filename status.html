@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>My Project Status — DEBUT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<header class="top">
+<div class="wrap">
+<a class="brand" href="/" aria-label="DEBUT หน้าแรก">
+<svg viewBox="0 0 270 240" aria-hidden="true"><rect width="40" height="240" fill="#161616"/><path d="M40 0A60 60 0 0 1 40 120Z" fill="#D93A26"/><path d="M40 120A60 60 0 0 1 40 240Z" fill="#1F4FA3"/><rect x="120" width="30" height="240" fill="#161616"/><path d="M150 0A120 120 0 0 1 150 240Z" fill="#F2B705"/><circle cx="190" cy="120" r="22" fill="#161616"/></svg>
+<b>DEBUT</b>
+</a>
+<span class="eyebrow">MY PROJECT STATUS</span>
+</div>
+</header>
+
+<main class="wrap">
+<div class="page-head" style="display:flex;flex-direction:column;gap:16px">
+<form class="lookup" id="lookup">
+<label class="sr" for="bno">เลข Booking</label>
+<input id="bno" type="text" placeholder="กรอกเลข Booking เช่น DBT-261028-1234" autocomplete="off">
+<button class="btn dark" type="submit">ตรวจสถานะ</button>
+</form>
+<span id="lookErr" style="font-size:14px;color:var(--urgent-text)" hidden></span>
+</div>
+
+<div id="empty" hidden style="padding-block:24px 96px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+<h1 style="margin:0;font:300 clamp(28px,3.6vw,40px)/1.25 var(--f-display)">ยังไม่มีนัดหมายในเบราว์เซอร์นี้</h1>
+<p class="lead">นัดคุยกับสถาปนิกผ่านแชตเดบูที่หน้าแรก แล้วเลข Booking จะแสดงที่นี่ หรือกรอกเลขที่ได้รับทางอีเมลด้านบน</p>
+<a class="btn primary" href="/">ไปหน้าแรกเพื่อคุยกับเดบู</a>
+</div>
+
+<div id="view" hidden>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;padding-bottom:32px">
+<div><div class="eyebrow" id="vNo"></div><h1 style="margin:8px 0 0;font:300 clamp(30px,4vw,48px)/1.2 var(--f-display)" id="vTitle"></h1></div>
+<span class="pill"><span style="width:8px;height:8px;border-radius:999px;background:var(--accent)"></span>รอทีมยืนยันนัดหมาย</span>
+</div>
+<ol class="timeline" aria-label="สถานะโครงการ">
+<li class="done"><span class="s" id="d1"></span><b style="font-weight:500">รับเรื่องจากแชต AI</b><small>สรุปความต้องการแล้ว</small></li>
+<li class="next"><span class="s">NEXT</span><b style="font-weight:500">ทีมยืนยันนัดหมาย</b><small>ภายใน 1 วันทำการ</small></li>
+<li><span class="s">PENDING</span><b style="font-weight:500;color:var(--ink-2)">ประชุมกับสถาปนิก</b><small id="d3"></small></li>
+<li><span class="s">PENDING</span><b style="font-weight:500;color:var(--ink-2)">เสนอแนวคิดการออกแบบ</b><small>ภายใน 2 สัปดาห์หลังประชุม</small></li>
+<li><span class="s">PENDING</span><b style="font-weight:500;color:var(--ink-2)">ใบเสนอราคาและสัญญา</b><small>หลังสรุปแนวคิด</small></li>
+</ol>
+<div class="cols" style="padding-top:32px">
+<div class="col-main">
+<div class="meet"><div style="display:flex;flex-direction:column;gap:4px"><span class="eyebrow">REQUESTED MEETING</span><b id="vWhen"></b><span id="vMode"></span></div></div>
+<div class="brief"><div class="hd eyebrow">AI BRIEF · สิ่งที่คุณเล่าให้เดบูฟัง</div><div class="gd"><div style="grid-column:1/-1"><span>หัวข้อ</span><p style="margin:0" id="vTopic"></p></div><div><span>อีเมลติดต่อ</span><p style="margin:0;overflow-wrap:anywhere" id="vEmail"></p></div><div><span>สร้างเมื่อ</span><p style="margin:0" id="vCreated"></p></div></div></div>
+</div>
+<div class="col-side">
+<div style="padding:24px;background:var(--surface);display:flex;flex-direction:column;gap:10px"><span class="eyebrow">YOUR ARCHITECT</span><b style="font-weight:500">ทีมจะแจ้งชื่อสถาปนิกผู้ดูแลหลังยืนยันนัด</b><span style="font-size:13px;color:var(--muted)">BAUHAUS DESIGN (THAILAND)</span></div>
+<a class="btn outline" href="/">ถามเดบูเพิ่มเติม</a>
+</div>
+</div>
+</div>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var $ = function (s) { return document.querySelector(s); };
+  var all = []; try { all = JSON.parse(localStorage.getItem("debut-bookings") || "[]"); } catch (e) {}
+  function showBooking(b) {
+    $("#empty").hidden = true; $("#view").hidden = false;
+    $("#vNo").textContent = "BOOKING " + b.no;
+    $("#vTitle").textContent = b.topic ? (b.topic.length > 60 ? b.topic.slice(0, 60) + "…" : b.topic) : "โครงการของคุณ";
+    $("#vWhen").textContent = b.when; $("#vMode").textContent = b.mode;
+    $("#vTopic").textContent = b.topic || "—"; $("#vEmail").textContent = b.email;
+    var c = new Date(b.createdAt); $("#vCreated").textContent = c.toLocaleString("th-TH");
+    $("#d1").textContent = "DONE · " + c.toLocaleDateString("th-TH", { day: "numeric", month: "short" });
+    $("#d3").textContent = b.when;
+  }
+  function find(no) { no = String(no || "").trim().toUpperCase(); return all.filter(function (b) { return b.no === no; })[0]; }
+  var fromHash = find(location.hash.slice(1));
+  if (fromHash) showBooking(fromHash); else if (all[0]) showBooking(all[0]); else $("#empty").hidden = false;
+  $("#lookup").addEventListener("submit", function (e) {
+    e.preventDefault(); var b = find($("#bno").value), err = $("#lookErr");
+    if (b) { err.hidden = true; showBooking(b); }
+    else { err.textContent = "ไม่พบเลข Booking นี้ในเบราว์เซอร์นี้ ตรวจตัวสะกด หรือเปิดลิงก์จากอีเมลยืนยันอีกครั้ง"; err.hidden = false; }
+  });
+})();
+</script>
+<script src="/assets/visit.js"></script>
+</body>
+</html>
