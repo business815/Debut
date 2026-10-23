@@ -147,3 +147,14 @@ svg.draw .f{transition:fill-opacity 1.2s ease 1.4s;fill-opacity:0}
 .sub-msg{margin:0;font-size:14px}
 .sub-msg:empty{display:none}
 .sub-msg.ok{color:var(--ok)}.sub-msg.err{color:var(--urgent-text)}
+/* Intro film: full-screen community video at the top of the home page */
+.intro-film{position:relative;height:min(calc(100vh - var(--top-h,72px)),56.25vw);height:min(calc(100svh - var(--top-h,72px)),56.25vw);min-height:200px;background:#0b0b0c;overflow:hidden}
+/* Show the whole frame (the title text is burned into the top of the video); a blurred copy of the poster fills any side bars. */
+.intro-film:before{content:"";position:absolute;inset:-40px;background:url(/assets/video/community-network.jpg) center/cover;filter:blur(28px) brightness(.55)}
+.intro-film video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.film-sound{position:absolute;right:calc(110px + env(safe-area-inset-right));bottom:24px;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid rgba(255,255,255,.5);border-radius:999px;background:rgba(0,0,0,.45);color:#fff;font-size:14px;cursor:pointer;backdrop-filter:blur(6px)}
+.film-sound .on{display:none}.film-sound[aria-pressed="true"] .on{display:inline}.film-sound[aria-pressed="true"] .off{display:none}
+.film-next{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:grid;place-items:center;width:44px;height:44px;border-radius:999px;background:rgba(255,255,255,.85);color:#111;animation:filmHint 2.2s ease-in-out infinite}
+@keyframes filmHint{50%{transform:translate(-50%,6px)}}
+@media (max-aspect-ratio:4/3){.film-sound{bottom:10px;right:10px;min-height:36px;padding:0 12px;font-size:13px}.film-sound span{display:none}.film-next{display:none}}
+@media (prefers-reduced-motion:reduce){.film-next{animation:none}}
