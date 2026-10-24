@@ -75,10 +75,12 @@
     b.type = "button"; b.addEventListener("click", function () { show("book"); });
     box.appendChild(b); return box;
   }
+  // Registration form inside the chat (assets/signup.js); falls back to a button to the FREE TRIAL section.
   function trialBox() {
     nudged = true;
     var box = el("div", "trial-nudge");
-    box.appendChild(el("small", "", "ทดลองใช้บริการสถาปนิกฟรี 30 วัน ไม่ตัดเงินระหว่างทดลอง ยกเลิกได้ทุกเมื่อ"));
+    box.appendChild(el("small", "", "ลงทะเบียนสมาชิกตรงนี้ได้เลย · ทดลองใช้บริการสถาปนิกฟรี 30 วัน ไม่ตัดเงินระหว่างทดลอง"));
+    if (window.debutSignup) { box.appendChild(window.debutSignup.form("chat")); return box; }
     var b = el("button", "btn primary", "สมัครทดลองใช้ฟรี 30 วัน");
     b.type = "button";
     b.addEventListener("click", function () {
@@ -140,7 +142,8 @@
       tip.remove();
       if (intent === "urgent") answer = "บริษัทได้รับความต้องการเร่งด่วนของท่านแล้ว ทีมบริหารโครงการจะทำการติดต่อกลับภายใน 30 นาที\n\n" + answer;
       answers++;
-      if (!nudged && !opts.lead && ((entry && entry.cta === "join") || answers >= NUDGE_ANSWERS || Date.now() - started >= NUDGE_MS)) opts.trial = true;
+      var registered = window.debutSignup && window.debutSignup.registered();
+      if (!registered && !opts.lead && ((entry && entry.cta === "join") || (!nudged && (answers >= NUDGE_ANSWERS || Date.now() - started >= NUDGE_MS)))) opts.trial = true;
       addBot(answer, opts);
       pose(intent === "complex" ? "site" : intent === "buying" ? "model" : "present", 2600);
       followUps(entry);
@@ -224,6 +227,7 @@
   }
   window.debutOpenChat = openChat;
   function closeChat() { chat.hidden = true; launch.hidden = false; $("#greet").hidden = true; }
+  window.debutCloseChat = closeChat;
   $("#chatClose").addEventListener("click", closeChat);
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !chat.hidden) closeChat(); });
   document.addEventListener("click", function (e) { var t = e.target.closest("[data-open-chat]"); if (!t) return; e.preventDefault(); openChat(t.getAttribute("data-chat-msg") || ""); });
