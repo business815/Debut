@@ -158,3 +158,30 @@ svg.draw .f{transition:fill-opacity 1.2s ease 1.4s;fill-opacity:0}
 @keyframes filmHint{50%{transform:translate(-50%,6px)}}
 @media (max-aspect-ratio:4/3){.film-sound{bottom:10px;right:10px;min-height:36px;padding:0 12px;font-size:13px}.film-sound span{display:none}.film-next{display:none}}
 @media (prefers-reduced-motion:reduce){.film-next{animation:none}}
+/* Member registration: band under the intro film, scroll pop-up, and the form inside the chat */
+.su-band{background:var(--night);color:var(--on-night);border-bottom:1px solid var(--line)}
+.su-band-in{display:flex;flex-wrap:wrap;gap:24px 48px;align-items:center;padding-block:40px}
+.su-copy{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.su-copy .eyebrow{color:var(--on-night-muted)}
+.su-copy h2{margin:0;font:400 clamp(26px,3.2vw,38px)/1.25 var(--f-display)}
+.su-copy h2 em{font-style:normal;color:#F6C945}
+.su-copy p{margin:0;font-size:15px;line-height:1.7;color:var(--on-night-muted);max-width:34em}
+.su-card{flex:1 1 420px;min-width:0;max-width:560px;background:#fff;color:var(--ink);padding:20px;box-shadow:var(--shadow)}
+.su{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.su input:not([type=checkbox]),.su select{min-height:46px;padding:0 12px;border:1px solid var(--line);background:#fff;min-width:0;width:100%;font:inherit;font-size:15px}
+.su .su-agree,.su .su-terms,.su .btn,.su .trial-msg{grid-column:1/-1}
+.su .su-agree{padding:4px 0}
+.su-terms{display:block;padding:8px 12px;background:#FFF6D6;border-left:3px solid #F2B705;color:var(--ink);font-size:13px;font-weight:500;text-decoration:none}
+.su-terms:hover{text-decoration:underline}
+.su .btn{min-height:48px}
+.su--chat,.su-pop .su{grid-template-columns:1fr}
+.su--chat{margin-top:8px;gap:6px}
+.su--chat input:not([type=checkbox]),.su--chat select{min-height:40px;font-size:14px}
+.su--chat .su-agree{font-size:12px}
+.su-pop{position:fixed;inset:0;z-index:95;display:grid;place-items:center;padding:16px;background:rgba(10,10,12,.55)}
+.su-pop[hidden]{display:none}
+.su-pop-box{position:relative;width:min(480px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#fff;padding:28px 24px 24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;animation:popIn .4s ease}
+.su-pop-box h2{margin:0;font:400 24px/1.3 var(--f-display)}
+.su-pop-box p{margin:0 0 6px;font-size:14px;line-height:1.7;color:var(--ink-2)}
+.su-x{position:absolute;top:10px;right:10px}
+@media (max-width:560px){.su{grid-template-columns:1fr}.su-band-in{padding-block:28px}.su-card{padding:16px}}
