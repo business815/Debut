@@ -26,6 +26,7 @@
   function showMsg() {
     if (shown || !msg) return;
     shown = true; msg.hidden = false; sec.classList.add("msg-on");
+    if (window.debutMiniWelcome) window.debutMiniWelcome(); // keep น้องเดบู's bubble off the message
   }
   function hideMsg() { if (msg) msg.hidden = true; sec.classList.remove("msg-on"); }
   if (msg) {

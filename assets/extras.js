@@ -29,7 +29,7 @@
     if (!node) return;
     var i = 0; node.textContent = "";
     clearInterval(node._t);
-    node._t = setInterval(function () { i += 2; node.textContent = text.slice(0, i); if (i >= text.length) { clearInterval(node._t); if (done) done(); } }, 28);
+    node._t = setInterval(function () { i += 3; node.textContent = text.slice(0, i); if (i >= text.length) { clearInterval(node._t); if (done) done(); } }, 22);
   }
   /* Cute cartoon-style voice: Thai greeting first, then English. Browsers only allow speech
      after the visitor has interacted with the page, so if the first try is blocked we
@@ -48,7 +48,8 @@
   }
   function speakWelcome(fromGesture) {
     var en = $("#welcomeTextEn"); if (en) { clearInterval(en._t); en.textContent = ""; }
-    typeOut($("#welcomeText"), WELCOME, function () { typeOut(en, WELCOME_EN); });
+    typed = false; clearTimeout(miniT);
+    typeOut($("#welcomeText"), WELCOME, function () { typeOut(en, WELCOME_EN, function () { typed = true; scheduleMini(); }); });
     var synth = window.speechSynthesis;
     if (!synth || !window.SpeechSynthesisUtterance) { talking(true); setTimeout(function () { talking(false); }, 3200); return; }
     var go = function () {
@@ -59,9 +60,9 @@
       var u1 = utter(spoken(WELCOME), "th-TH", th, 1.7, 1.05);
       var u2 = utter(spoken(WELCOME_EN), "en-US", en, 1.85, 1.08);
       u1.onstart = function () { spokenOnce = true; pendingVoice = false; talking(true); };
-      u2.onend = function () { talking(false); };
+      u2.onend = function () { talking(false); scheduleMini(); };
       u1.onerror = function (e) { talking(false); if (!fromGesture && e && /not-allowed/.test(e.error || "")) pendingVoice = true; };
-      u2.onerror = function () { talking(false); };
+      u2.onerror = function () { talking(false); scheduleMini(); };
       talking(true);
       synth.speak(u1); synth.speak(u2);
       if (!fromGesture) setTimeout(function () { if (!spokenOnce && !synth.speaking) { talking(false); pendingVoice = true; } }, 1200);
@@ -86,9 +87,34 @@
     var g = $("#greet"); if (g) g.hidden = true;
     speakWelcome(false);
   }
-  function hideWelcome() { welcome.hidden = true; filmsFab.hidden = false; if (window.speechSynthesis) speechSynthesis.cancel(); talking(false); }
+  function hideWelcome() { clearTimeout(miniT); welcome.classList.remove("shrink"); welcome.hidden = true; filmsFab.hidden = false; if (window.speechSynthesis) speechSynthesis.cancel(); talking(false); }
+  /* Once Debu has typed (and, if the voice is playing, spoken) every line, the bubble shrinks
+     down into the corner button so it never covers the film message on the home page. */
+  var typed = false, miniT = null, hovering = false;
+  function scheduleMini() {
+    clearTimeout(miniT);
+    miniT = setTimeout(function () {
+      if (!welcome || welcome.hidden) return;
+      var synth = window.speechSynthesis;
+      if (!typed || (synth && synth.speaking) || hovering) return scheduleMini();
+      shrinkWelcome(false);
+    }, 1500);
+  }
+  // keepVoice: the film message also calls this, and Debu may finish speaking while minimised.
+  function shrinkWelcome(keepVoice) {
+    if (!welcome || welcome.hidden || welcome.classList.contains("shrink")) return;
+    clearTimeout(miniT);
+    welcome.classList.add("shrink");
+    setTimeout(function () {
+      if (keepVoice) { welcome.classList.remove("shrink"); welcome.hidden = true; filmsFab.hidden = false; }
+      else hideWelcome();
+    }, 450);
+  }
+  window.debutMiniWelcome = function () { shrinkWelcome(true); };
   if (welcome) {
     $("#welcomeClose").addEventListener("click", hideWelcome);
+    welcome.addEventListener("pointerenter", function () { hovering = true; });
+    welcome.addEventListener("pointerleave", function () { hovering = false; });
     $("#welcomeSpeak").addEventListener("click", function () { speak(); });
     $("#welcomeFilms").addEventListener("click", function () { hideWelcome(); openFilms(); });
     filmsFab.addEventListener("click", function () { openFilms(); });
