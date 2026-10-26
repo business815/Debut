@@ -158,6 +158,22 @@ svg.draw .f{transition:fill-opacity 1.2s ease 1.4s;fill-opacity:0}
 @keyframes filmHint{50%{transform:translate(-50%,6px)}}
 @media (max-aspect-ratio:4/3){.film-sound{bottom:10px;right:10px;min-height:36px;padding:0 12px;font-size:13px}.film-sound span{display:none}.film-next{display:none}}
 @media (prefers-reduced-motion:reduce){.film-next{animation:none}}
+/* Message panel shown when the intro film finishes its first play */
+.intro-film.msg-on video{filter:brightness(.4)}
+.film-msg{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;padding:24px max(24px,8vw);text-align:center;color:#fff;background:radial-gradient(ellipse at center,rgba(0,0,0,.55),rgba(0,0,0,.2) 75%);animation:filmMsgIn .9s ease-out both}
+.film-msg[hidden]{display:none}
+.film-msg .eyebrow{color:rgba(255,255,255,.75);letter-spacing:.18em}
+.film-msg h2{margin:0;max-width:22em;font:600 clamp(26px,3.6vw,52px)/1.3 var(--f-display);text-wrap:balance;text-shadow:0 2px 18px rgba(0,0,0,.6)}
+.film-msg h2 em{display:block;font-style:normal;color:#F3D27A}
+.film-msg p{margin:0;max-width:38em;font:400 clamp(16px,1.6vw,22px)/1.65 var(--f-display);color:rgba(255,255,255,.92);text-wrap:pretty;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+.film-msg-act{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:6px}
+.film-msg .btn.ghost-light{color:#fff;border-color:rgba(255,255,255,.6);background:rgba(0,0,0,.25)}
+.film-msg-x{position:absolute;top:16px;right:16px;display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(255,255,255,.5);border-radius:999px;background:rgba(0,0,0,.4);color:#fff;cursor:pointer}
+.intro-film.msg-on .film-sound,.intro-film.msg-on .film-next{display:none}
+@keyframes filmMsgIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+/* Narrow screens: the film is short, so the section grows to fit the message */
+@media (max-aspect-ratio:4/3){.intro-film.msg-on{height:auto}.intro-film.msg-on video{filter:brightness(.18) blur(2px)}.film-msg{position:relative;inset:auto;min-height:100%;padding:56px 20px 28px;gap:10px}.film-msg h2{font-size:clamp(22px,6vw,30px)}.film-msg p{font-size:15px}.film-msg-x{top:10px;right:10px;width:40px;height:40px}}
+@media (prefers-reduced-motion:reduce){.film-msg{animation:none}}
 /* Member registration: band under the intro film, scroll pop-up, and the form inside the chat */
 .su-band{background:var(--night);color:var(--on-night);border-bottom:1px solid var(--line)}
 .su-band-in{display:flex;flex-wrap:wrap;gap:24px 48px;align-items:center;padding-block:40px}
