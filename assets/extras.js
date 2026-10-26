@@ -9,19 +9,31 @@
   var TOY = '<span class="toy" data-debu-live="full"><img src="/assets/debu.jpg" alt="" width="410" height="490"></span>';
   document.querySelectorAll("[data-toy]").forEach(function (n) { n.innerHTML = TOY; });
 
-  var WELCOME = "สวัสดีครับ! ผมน้องเดบู ยินดีต้อนรับสู่โลกแห่งการออกแบบของ DEBUT ที่ไอเดียของคุณจะกลายเป็นอาคารจริง ด้วย AI และสถาปนิกตัวจริงครับ";
+  var WELCOME = "สวัสดีครับ ผมน้องเดบู 👋\n" +
+    "งานก่อสร้างไม่ได้ยากที่แบบ แต่ยากที่หาคนที่ใช่ คุยภาษาเดียวกัน และจ่ายเงินอย่างมั่นใจ\n" +
+    "DEBUT ดูแลครบทั้งสามเรื่อง เราคัดสถาปนิก ดีไซเนอร์ และผู้รับเหมามืออาชีพ แล้วแมตช์ให้ตรงกับงานของคุณ\n" +
+    "เงินทุกงวดผ่านระบบตัวกลางที่ปลอดภัย จ่ายเมื่องานเสร็จตามจริง\n" +
+    "เล่าโปรเจกต์ให้ผมฟังได้เลยครับ\n" +
+    "พื้นที่ของเราคือโอกาสครั้งสำคัญในชีวิต ✨";
+  var WELCOME_EN = "Hi, I'm Debu 👋\n" +
+    "The hardest part of building isn't the design. It's finding the right people, speaking the same language, and paying with confidence.\n" +
+    "DEBUT takes care of all three. We vet architects, designers and contractors, then match the right professionals to your project.\n" +
+    "Every payment is held safely in escrow and released only when the work is done.\n" +
+    "Tell me about your project!\n" +
+    "Our space is the opportunity of a lifetime. ✨";
+  // Speech reads the lines without emoji.
+  function spoken(t) { return t.replace(/[\u{1F300}-\u{1FAFF}\u2728]/gu, "").replace(/\n/g, " "); }
   var toys = function () { return document.querySelectorAll(".toy"); };
   function talking(on) { toys().forEach(function (t) { t.classList.toggle("talk", on); }); }
-  function typeOut(node, text) {
+  function typeOut(node, text, done) {
     if (!node) return;
     var i = 0; node.textContent = "";
     clearInterval(node._t);
-    node._t = setInterval(function () { i += 2; node.textContent = text.slice(0, i); if (i >= text.length) clearInterval(node._t); }, 28);
+    node._t = setInterval(function () { i += 2; node.textContent = text.slice(0, i); if (i >= text.length) { clearInterval(node._t); if (done) done(); } }, 28);
   }
-  /* Cute cartoon-style voice: English line first, then Thai. Browsers only allow speech
+  /* Cute cartoon-style voice: Thai greeting first, then English. Browsers only allow speech
      after the visitor has interacted with the page, so if the first try is blocked we
      speak on the visitor's first tap / click / key press. */
-  var WELCOME_EN = "Welcome to the world of design!";
   var spokenOnce = false, pendingVoice = false;
   function pickVoice(list, re, prefer) {
     var m = list.filter(function (v) { return re.test(v.lang); });
@@ -35,7 +47,8 @@
     return u;
   }
   function speakWelcome(fromGesture) {
-    typeOut($("#welcomeText"), WELCOME);
+    var en = $("#welcomeTextEn"); if (en) { clearInterval(en._t); en.textContent = ""; }
+    typeOut($("#welcomeText"), WELCOME, function () { typeOut(en, WELCOME_EN); });
     var synth = window.speechSynthesis;
     if (!synth || !window.SpeechSynthesisUtterance) { talking(true); setTimeout(function () { talking(false); }, 3200); return; }
     var go = function () {
@@ -43,8 +56,8 @@
       var en = pickVoice(vs, /^en/i, [/Samantha/i, /Google US English/i, /Zira|Aria|Jenny/i, /female/i]);
       var th = pickVoice(vs, /^th/i, [/Kanya/i, /Google/i, /Premwadee|Achara/i]);
       synth.cancel();
-      var u1 = utter(WELCOME_EN, "en-US", en, 1.85, 1.08);
-      var u2 = utter(WELCOME, "th-TH", th, 1.7, 1.05);
+      var u1 = utter(spoken(WELCOME), "th-TH", th, 1.7, 1.05);
+      var u2 = utter(spoken(WELCOME_EN), "en-US", en, 1.85, 1.08);
       u1.onstart = function () { spokenOnce = true; pendingVoice = false; talking(true); };
       u2.onend = function () { talking(false); };
       u1.onerror = function (e) { talking(false); if (!fromGesture && e && /not-allowed/.test(e.error || "")) pendingVoice = true; };
