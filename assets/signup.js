@@ -29,7 +29,7 @@
       '<label class="sr" for="' + id + 'e">อีเมล</label><input id="' + id + 'e" type="email" autocomplete="email" placeholder="อีเมล" required>' +
       '<label class="sr" for="' + id + 'p">เบอร์โทร</label><input id="' + id + 'p" type="tel" autocomplete="tel" placeholder="เบอร์โทร">' +
       '<label class="sr" for="' + id + 's">ประเภทโครงการ</label><select id="' + id + 's">' + PROJECTS.map(function (p) { return "<option>" + p + "</option>"; }).join("") + "</select>" +
-      '<label class="agree su-agree"><input type="checkbox"> <span>ไม่มีค่าใช้จ่ายใน 30 วันแรก ยกเลิกได้ทุกเมื่อก่อนครบกำหนด</span></label>' +
+      '<label class="agree su-agree"><input type="checkbox"> <span>ไม่มีค่าใช้จ่ายใน 30 วันแรก ยกเลิกได้ทุกเมื่อก่อนครบกำหนด · ยอมรับ<a href="/terms" target="_blank">ข้อกำหนด</a>และ<a href="/refund" target="_blank">นโยบายคืนเงิน</a></span></label>' +
       '<a class="su-terms" href="#trial">รายละเอียดสิทธิประโยชน์และเงื่อนไขสมาชิก อยู่ด้านล่าง ↓</a>' +
       '<button class="btn primary" type="submit">ลงทะเบียน · ทดลองฟรี 30 วัน</button>' +
       '<p class="trial-msg" role="status" hidden></p>';

@@ -54,7 +54,7 @@
     bar.className = "ads-consent";
     bar.setAttribute("role", "dialog");
     bar.setAttribute("aria-label", "การใช้คุกกี้");
-    bar.innerHTML = "<p>เราใช้คุกกี้เพื่อวัดผลโฆษณาบน Facebook, Instagram และ TikTok และแนะนำบริการที่ตรงกับความสนใจของคุณ</p>" +
+    bar.innerHTML = "<p>เราใช้คุกกี้เพื่อวัดผลโฆษณาบน Facebook, Instagram และ TikTok และแนะนำบริการที่ตรงกับความสนใจของคุณ · <a href=\"/privacy\">นโยบายความเป็นส่วนตัว</a></p>" +
       '<div><button class="btn outline" type="button" data-v="no">ไม่ยอมรับ</button><button class="btn primary" type="button" data-v="yes">ยอมรับ</button></div>';
     bar.addEventListener("click", function (e) {
       var v = e.target.getAttribute && e.target.getAttribute("data-v"); if (!v) return;
